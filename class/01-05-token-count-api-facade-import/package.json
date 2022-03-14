@@ -1,0 +1,9 @@
+{
+  "name": "01-05-token-count-api-facade-import",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

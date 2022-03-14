@@ -1,0 +1,23 @@
+{
+  "name": "Backend-js",
+  "version": "1.0.0",
+  "description": "이 프로젝트를 `Fork Repl`해서 사용하세요.",
+  "main": "index.js",
+  "scripts": {
+    "test:day06": "jest handleEdit",
+    "test:day07": "jest takeRank",
+    "test:day08": "jest reverseStr",
+    "test:day09": "jest vote",
+    "test:day10": "jest pencil"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.3.1"
+  },
+   "jest": {
+    "reporters": ["<rootDir>/custom-reporter.js"]
+  }
+ 
+}
