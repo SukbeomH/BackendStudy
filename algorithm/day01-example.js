@@ -8,5 +8,5 @@ const answer = rest / 2;
 if ( rest % 2 === 0 ) {
   console.log(answer);
 } else {
-  console.log(rest / 2) + 1;
+  console.log(answer) + 1;
 }
