@@ -2,12 +2,11 @@
 //1층에 있다, 100층까지 최소횟수로 올라가는 방법은?
 let now = 1;
 let destination = 100;
+let rest = destination - now + 1;
+const answer = rest / 2;
 
-let floor = destination - now + 1;
-
-if ( floor % 2 === 0 ) {
-  const answer = floor/2
+if ( rest % 2 === 0 ) {
   console.log(answer);
 } else {
-  console.log(floor / 2) + 1;
+  console.log(rest / 2) + 1;
 }
