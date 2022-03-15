@@ -10,7 +10,9 @@ function solution(phone) {
     for (let i = 0; i < 4; i++){
       arr.push("*")
     }
-    return String(arr.join(''))
+    return arr.join('')
+  
+    // return arr.fill(*, 7).join('')
   }
   console.log("결과", solution('01012345678')); // "0101234****"
   

@@ -4,9 +4,12 @@
 const arr = ['김세준', '백선호', '조아라', '홍재훈'];
 
 function cb(element) {
-  if (element[0] === '조'){
-    return element
-  }
+  // if (element[0] === '조'){
+  //   return element
+  // }
+  return element[0] === '조'
+  
+  // return element.startWith('조')
 }
 
 const result = arr.findIndex(cb);
