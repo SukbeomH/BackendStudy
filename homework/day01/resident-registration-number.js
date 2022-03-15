@@ -37,14 +37,7 @@ export function isDividerValid(regNumber) {
 //     3. 뒤 7자리 중, 끝 6자리는 *로 변경해서 출력해 주세요.
 export function MaskedNum(regNumber) {
     let arr = regNumber.split('');
-    // 여기에서 작성해주세요.
-    for (let i = 0; i < 6; i++){
-      arr.pop()
-    }
-    for (let i = 0; i < 6; i++){
-      arr.push("*")
-    }
-    const result = String(arr.join(''));
+    const result = arr.fill('*', -6).join('')
     console.log(result)
     return result;
   }
