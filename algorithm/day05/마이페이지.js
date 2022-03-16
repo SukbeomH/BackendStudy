@@ -23,7 +23,27 @@ const myShopping = [
     { category: "의류", price : 10000 },
 ]
 
+function shopClothes(list) {
+    let buy = 0;
+    let cost = 0;
+    let grade = '';
+    for (let element of list) {
+        if (element.category === "의류") {
+            buy = buy + 1;
+            cost = cost + element.price;
+            if (buy >= 5) {
+                grade = "Gold";
+            } else if (buy > 2) {
+                grade = "Silver";
+            } else {
+                grade = "Bronze";
+            }
+        }
+    }
+    console.log(`의류를 구매한 횟수는 총 ${buy}회 금액은 ${cost}원이며 등급은 ${grade}입니다.`)
+    return `의류를 구매한 횟수는 총 ${buy}회 금액은 ${cost}원이며 등급은 ${grade}입니다.`
+}
 
-
+shopClothes(myShopping);
 
 //의류를 구매한 횟수는 총 5회 금액은 57000원이며 등급은 Gold입니다.

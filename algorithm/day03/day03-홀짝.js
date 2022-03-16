@@ -3,10 +3,16 @@
 
 function evenOdd(num) {
 	if(num === 0) {
+        console.log("Zero");
         return "Zero";
     } else if (num % 2 === 0) {
+        console.log("Even");
         return "Even";
     } else {
+        console.log("Odd");
         return "Odd";
     }
 }
+evenOdd(12)
+evenOdd(15)
+evenOdd(0)
