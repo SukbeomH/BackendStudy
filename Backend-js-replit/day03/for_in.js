@@ -8,6 +8,10 @@ const obj = {
 };
 
 for (let key in obj) {
+  if (obj.title || obj.name) {
+    obj.title = obj.title.toUpperCase();
+    obj.name = obj.name.toUpperCase();
+  }
 }
 
 console.log(obj);
