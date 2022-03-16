@@ -1,0 +1,9 @@
+{
+  "name": "02-04-welcom-template-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

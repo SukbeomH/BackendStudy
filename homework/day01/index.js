@@ -1,5 +1,5 @@
 import { MaskedNum, NumInputFront, NumInputback, isDividerValid, isNumValid }
-    from './resident-registration-number.js'
+    from './resident-registration-number.js';
 
 
 function CheckRegNumber(number) {
