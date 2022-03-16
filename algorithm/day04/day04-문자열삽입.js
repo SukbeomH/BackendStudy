@@ -4,10 +4,11 @@
 
 function makeNumber(num) {
     let str = '1';
-    for (let i = 1; i <= num.length; i++){
-        str = str + '-' + i;
+    for (let i = 2; i <= num; i++){
+        str = str + '-' + `${i}`;
     }
     console.log(str);
+    return str;
 }
 
 makeNumber(5) // 1-2-3-4-5
