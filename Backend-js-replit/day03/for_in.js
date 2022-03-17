@@ -20,3 +20,12 @@ console.log(obj);
 //   name : "JANE",
 //   contents: "Nothing to say"
 // }
+
+// for .. of 를 사용 (Object.keys())
+for (let ele of Object.keys(obj)) {
+  if (obj.title || obj.name) {
+    obj.title = obj.title.toUpperCase();
+    obj.name = obj.name.toUpperCase();
+  }
+}
+console.log(obj);
