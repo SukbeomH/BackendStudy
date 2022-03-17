@@ -7,15 +7,18 @@ function solution(arr) {
   let str = '';
 
   for (let i = 0; i < arr.length; i++) {
-
-    
+    switch (typeof arr[i]) {
+      case ('number'):
+        sum = sum + arr[i];
+        break;
+      case ('string'):
+        str = str + arr[i];
+        break;
+    }
   }
-
   return [sum, str];
 }
 
 const arr = [4, 6, 'aa', 2, 'b', 3];
-
 const result = solution(arr);
-
 console.log(result); // [15, "aab"]
