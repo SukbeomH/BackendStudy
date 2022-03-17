@@ -6,7 +6,7 @@ import {checkValidationPhone, getToken, sendToPhone} from './phone.js'
 // const {} = reqiure('./phone.js')
  
 //보다 API스럽게 만들어보자
-function createTokenOfPhone(telnum) {
+export function createTokenOfPhone(telnum) {
     const isValid = checkValidationPhone(telnum);
     if (isValid) {
         const result = getToken();
@@ -14,4 +14,4 @@ function createTokenOfPhone(telnum) {
     }
 }
 
-createTokenOfPhone("01012345678")
+// createTokenOfPhone("01012345678")
