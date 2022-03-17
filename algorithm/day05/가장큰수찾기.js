@@ -20,3 +20,18 @@ function bigNum(str) {
 }
 bigNum("12345") // 5
 bigNum("87135") // 8
+
+
+//다른 방법 (펑션 no)
+function bigNum2(str) {
+    let biggest = 0;
+    for (let i = 1; i < str.length; i++){
+        if (Number(str[i]) > biggest) {
+            console.log(str[i], biggest)
+            biggest = Number(str[i]);
+        }
+    }
+}
+
+bigNum2("12345") // 5
+bigNum2("87135") // 8
