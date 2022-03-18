@@ -72,7 +72,7 @@ const myResolvers = {
 			console.log("등록 성공!!");
 		},
 		createTokenOfPhone: (_, args) => {
-			createTokenOfPhone(args.phone);
+			createTokenOfPhone(args);
 			return "인증완료 ~";
 		},
 	},

@@ -3,11 +3,10 @@
 // HINT : Number('1')
 
 function solution(element, index, array) {
-
-  
+	return Number(element);
 }
 
-const arr = ['1', '2', '3'];
+const arr = ["1", "2", "3"];
 
 const result = arr.map(solution);
 

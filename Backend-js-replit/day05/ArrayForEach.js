@@ -5,8 +5,9 @@
 let count = 0;
 
 function solution(element, index, array) {
-
-  
+	if (element % 2 === 0) {
+		count += 1;
+	}
 }
 
 const arr = [1, 2, 3, 4, 5];
