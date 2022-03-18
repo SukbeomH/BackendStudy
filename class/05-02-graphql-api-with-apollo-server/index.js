@@ -18,7 +18,8 @@ const myTypeDefs = gql`
 // 엔드포인트 대화합의 장
 const myResolvers = {
 	Query: {
-		hello: () => "world",
+		//API이름: () => {실행할 내용}
+		hello: () => "world", //혼자서 바로 리턴되기 때문에 모든 괄호가 생략되었다
 	},
 };
 
