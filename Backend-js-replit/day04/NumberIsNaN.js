@@ -7,17 +7,20 @@
   총 합을 리턴하는 함수 solution을 완성해주세요.
 */
 function solution(arr) {
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (!Number.isNaN(Number(arr[i]))) {
-      sum = sum + Number(arr[i]);
-    }
-  }
-  return sum;
+	let sum = 0;
+	for (let i = 0; i < arr.length; i++) {
+		if (!Number.isNaN(Number(arr[i]))) {
+			sum = sum + Number(arr[i]);
+		}
+	}
+	return sum;
 }
 
-const arr = ['1', '2w', '3', 'qwer'];
+const arr = ["1", "2w", "3", "qwer"];
 
 const result = solution(arr);
 
 console.log(result); // 4
+
+// isNaN 의 경우 숫자인지 아닌지 판별
+// Number.isNaN 의 경우에는 NaN인지 아닌지 판별
