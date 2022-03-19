@@ -6,17 +6,20 @@
 // s는 길이 1 이상, 길이 8 이하인 문자열입니다.
 
 function solution(s) {
-	if (s.length === 4 || s.length === 6) {
-		for (let i = 0; i < s.length; i++) {
-			//문자가 포함되어있는가?
-			if (typeof Number(s[i]) === "string") {
+	if (!(s.length == 4 || s.length == 6)) {
+		return false;
+	} else {
+		const tmp = s.split("");
+		for (let i = 0; i < tmp.length; i++) {
+			if (isNaN(tmp[i])) {
 				return false;
 			}
-			return true;
 		}
 	}
 	return true;
 }
-
 solution("a234"); //false
 solution("1234"); //true
+
+// 지수 e 의 경우를 감안
+// 0000 이나 0을 포함하는 경우도 감안
