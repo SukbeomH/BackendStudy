@@ -4,7 +4,7 @@
 function solution(element, index, array) {
 	console.log(index);
 	// 여기에서 작업하세요.
-	if (!array[index]) {
+	if (!element) {
 		console.log("400 ERROR");
 	}
 }
