@@ -15,3 +15,11 @@ const arr = [1, 2, 3, 4, 5];
 arr.forEach(solution);
 
 console.log(count); // 2
+
+// for (let i = 0; i < arr.length; i++){
+//     if (element % 2 === 0) {
+// 		count += 1;
+// 	}
+// }
+
+//for of 가 더 빠르다.

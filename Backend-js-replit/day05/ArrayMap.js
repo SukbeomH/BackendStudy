@@ -7,7 +7,6 @@ function solution(element, index, array) {
 }
 
 const arr = ["1", "2", "3"];
-
 const result = arr.map(solution);
 
 console.log(result); // [1, 2, 3]

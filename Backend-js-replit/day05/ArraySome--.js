@@ -3,9 +3,8 @@
 // solution 함수를 완성해주세요.
 function solution(element, index, array) {
 	console.log(index);
-	// 여기에서 작업하세요.
 	if (!element) {
-		console.log("400 ERROR");
+		return console.log("400 ERROR"); //리턴을 통해 순회를 종료한다.
 	}
 }
 
