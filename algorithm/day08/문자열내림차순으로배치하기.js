@@ -4,3 +4,9 @@
 
 // 제한 사항
 // str은 길이 1 이상인 문자열입니다.
+
+function solution(s) {
+	var answer = "";
+	answer = s.split("").sort().reverse().join("");
+	return answer;
+}
