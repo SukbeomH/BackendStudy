@@ -16,3 +16,8 @@ function solution(arr) {
 
 solution([1, 2, 3, 4]);
 solution([5, 5]);
+
+// Array.reduce( (누적값, cur) => {}, 초기값)
+// 누적값은 함수 내에서 리턴한 값이 새로 들어가게 된다. 따라서 필수.
+//
+// 초기값은 최초 시작되는 값을 지정해줄 수 있다. (optional)

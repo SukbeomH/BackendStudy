@@ -8,48 +8,44 @@
 // 제한사항
 // 배열 arr의 크기 : 1,000,000 이하의 자연수
 // 배열 arr의 원소의 크기 : 0보다 크거나 같고 9보다 작거나 같은 정수
-function solution(arr)
-{
-    var answer = [];
-    for (let ele in arr) {
-        //어레이 ele 번째 값이 그 다음값과 다르면 
-        if (arr[ele] !== arr[ele + 1]) {
-            //넣으려는 값이 새 배열의 마지막에 이미 있으면 넣지 않는다
-            if (answer[answer.length - 1] !== arr[ele]) {
-            //없다면 ele값을 새 배열에 넣는다
-            answer.push(arr[ele]);
-            }
-        }
-    }
-    // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    console.log(answer)
-    return answer;
+function solution(arr) {
+	var answer = [];
+	for (let i in arr) {
+		//어레이 ele 번째 값이 그 다음값과 다르면
+		// ==
+		//넣으려는 값이 새 배열의 마지막에 이미 있으면 넣지 않는다
+		if (answer[answer.length - 1] !== arr[i]) {
+			//없다면 ele값을 새 배열에 넣는다
+			answer.push(arr[i]);
+		}
+	}
+	// [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
+	console.log(answer);
+	return answer;
 }
-solution([1, 1, 3, 3, 0, 1, 1])	//[1,3,0,1]
-solution([4,4,4,3,3])	//[4,3]
+solution([1, 1, 3, 3, 0, 1, 1]); //[1,3,0,1]
+solution([4, 4, 4, 3, 3]); //[4,3]
 
 //배열의 n번째 값과 n+1번째 값이 같으면
 //n번째 값을 새 배열에 넣는다,
 //n+2...n+n의 값이 이미 새 배열의 마지막에 있을 경우
 //넣지 않는다
 
-
 function solution2(arr) {
-    var answer = [];
-    for (let ele = 0; ele < arr.length; ele++) {
-    //어레이 ele 번째 값이 그 다음값과 다르면 && 넣으려는 값이 새 배열의 마지막에 이미 있으면 넣지 않는다
-        if ((arr[ele] !== arr[ele + 1])&&(answer[answer.length - 1] !== arr[ele])) {
-            //없다면 ele값을 새 배열에 넣는다
-            answer.push(arr[ele]);
-        }
-    }
-    // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    console.log(answer)
-    return answer;
+	var answer = [];
+	for (let ele = 0; ele < arr.length; ele++) {
+		//어레이 ele 번째 값이 그 다음값과 다르면 && 넣으려는 값이 새 배열의 마지막에 이미 있으면 넣지 않는다
+		if (arr[ele] !== arr[ele + 1] && answer[answer.length - 1] !== arr[ele]) {
+			//없다면 ele값을 새 배열에 넣는다
+			answer.push(arr[ele]);
+		}
+	}
+	// [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
+	console.log(answer);
+	return answer;
 }
 
 //다른 풀이
 function solution3(arr) {
-    return arr.filter((val,index) => val !== arr[index+1]);
+	return arr.filter((val, index) => val !== arr[index + 1]);
 }
-

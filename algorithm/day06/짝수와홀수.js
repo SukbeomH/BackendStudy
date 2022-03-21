@@ -5,11 +5,13 @@
 // 0은 짝수입니다.
 
 function solution(num) {
-    var answer = '';
-    if (num % 2 === 0) {
-        answer = "Even"
-    } else {
-        answer = "Odd"
-    }
-    return answer;
+	var answer = "";
+	if (num % 2 === 0) {
+		answer = "Even";
+	} else {
+		answer = "Odd";
+	}
+	return answer;
 }
+
+//삼항연산자
