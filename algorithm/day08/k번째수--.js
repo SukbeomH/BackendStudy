@@ -17,8 +17,12 @@ function solution(array, commands) {
 	let answer = [];
 	let temp = [];
 	for (let i = 0; i < commands.length; i++) {
-		temp = array.slice(commands[i][0] - 1, commands[i][1]).sort();
+		temp = array.slice(commands[i][0] - 1, commands[i][1]).sort(sortNumber);
 		answer.push(temp[commands[i][2] - 1]);
 	}
 	return answer;
+}
+
+function sortNumber(a, b) {
+	return a - b;
 }
