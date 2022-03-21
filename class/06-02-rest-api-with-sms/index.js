@@ -2,12 +2,15 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+import axios from "axios";
+import dotenv from "dotenv";
 import { options } from "./swagger/config.js";
-import { createTokenOfPhone } from "../01-05-token-count-api-facade-import/index.js";
+import { createTokenOfPhone } from "./sms.js";
 const app = express();
 const port = 3000;
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
+dotenv.config();
 
 //서버가 듣고있나요?
 app.listen(port, () => {
@@ -58,6 +61,6 @@ app.post("/boards", (req, res) => {
 });
 
 app.post("/tokens/phone", (req, res) => {
-	createTokenOfPhone(req.body.phone);
+	createTokenOfPhone(req.body);
 	res.send("인증완료");
 });
