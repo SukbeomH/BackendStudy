@@ -2,17 +2,16 @@
 // 뒤의 4자리를 "*"로 바꿔서 리턴해주세요.
 
 function solution(phone) {
-    let arr = phone.split('');
-    // 여기에서 작성해주세요.
-    for (let i = 0; i < 4; i++){
-      arr.pop()
-    }
-    for (let i = 0; i < 4; i++){
-      arr.push("*")
-    }
-    return arr.join('')
-  
-    // return arr.fill(*, 7).join('')
-  }
-  console.log("결과", solution('01012345678')); // "0101234****"
-  
+	let arr = phone.split("");
+	// 여기에서 작성해주세요.
+	for (let i = 0; i < 4; i++) {
+		arr.pop();
+	}
+	for (let i = 0; i < 4; i++) {
+		arr.push("*");
+	}
+	return arr.join("");
+
+	// return arr.fill(*, 7).join('')
+}
+console.log("결과", solution("01012345678")); // "0101234****"
