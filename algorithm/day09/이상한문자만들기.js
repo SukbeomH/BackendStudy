@@ -11,7 +11,7 @@ function solution(s) {
 	let newArr = s.split(" ");
 	//console.log(newArr); //[ 'try', 'hello', 'world' ]
 	// newArr를 각 엘레먼트의 글자 길이만큼 순회한다
-	newArr.forEach((ele, idx, arr) => {
+	answerTemp = newArr.forEach((ele, idx, arr) => {
 		// 각 엘레먼트에서 글자 수만큼 순회한다
 		for (let i = 0; i < ele.length; i++) {
 			// 엘레먼트의 글자순서가 짝,홀수인지 구분한다
