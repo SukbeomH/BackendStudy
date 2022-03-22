@@ -7,11 +7,11 @@ import { checkValidationPhone, getToken, sendToPhone } from "./phoneSystem.js";
 
 //보다 API스럽게 만들어보자
 export function createTokenOfPhone(telnum) {
-	const isValid = checkValidationPhone(telnum);
-	if (isValid) {
-		const result = getToken();
-		sendToPhone(telnum, result);
-	}
+  const isValid = checkValidationPhone(telnum);
+  if (isValid) {
+    const result = getToken();
+    sendToPhone(telnum, result);
+  }
 }
 
 // createTokenOfPhone("01012345678")

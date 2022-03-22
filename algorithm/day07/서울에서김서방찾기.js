@@ -8,13 +8,16 @@
 // "Kim"은 반드시 seoul 안에 포함되어 있습니다.
 
 function solution(seoul) {
-	var answer = "";
+	var x = "";
 	for (let i = 0; i < seoul.length; i++) {
 		if (seoul[i] === "Kim") {
-			answer = i;
+			x = i;
 		}
 	}
-	return `김서방은 ${answer}에 있다`;
+	return `김서방은 ${x}에 있다`;
 }
 
 solution(["Jane", "Kim"]); // "김서방은 1에 있다"
+
+// x = seoul.indexOf("Kim")
+// 내부적으로는 for문이 작동한다.

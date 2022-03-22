@@ -15,7 +15,7 @@
  *                  application/json:
  *                      schema:
  *                          type: array
- *                          items: 
+ *                          items:
  *                              properties:
  *                                  email:
  *                                      type: string
@@ -32,5 +32,5 @@
  *                                  prefer:
  *                                      type: string
  *                                      example: http://fedex.com
- *     
+ *
  */

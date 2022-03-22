@@ -14,17 +14,25 @@ function solution(n) {
 	return answer;
 }
 
-// function solution(n) {
-// 	var answer = 0;
-// 	let i;
-//              n의 제곱근까지만 연산한다
-// 	for (i = 1; i <= Math.sqrt(n); i++) {
-// 		if (!(n % i)) {
-//           그 대신 약수 i를 구할 때, 그 반대 약수를 같이 더한다
-// 			answer += i + n / i;
-// 		}
-// 	}
-//  뭔소린지 모르겠음
-// 	i--;
-// 	return i === n / i ? answer - i : answer;
-// }
+function solution2(n) {
+	var answer = n;
+	for (let i = 1; i <= n / 2; i++) {
+		if (n % i === 0) {
+			answer += i;
+		}
+	}
+	return answer;
+}
+
+function solution3(n) {
+	// n의 공간을 가진 새 배열을 만드는 법
+	const answer = new Array(n);
+	// 이 상태로는 undefined로 채워져있어서 메소드 사용불가.
+	answer = answer.fill(1);
+	// 일괄적으로 1을 채워줌
+
+	// 누적
+	answer.reduce((acc, cur) => {
+		return n % (cur + i) === 0 ? acc + (cur + i) : acc;
+	}, 0);
+}

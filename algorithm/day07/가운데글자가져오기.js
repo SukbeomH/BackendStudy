@@ -16,3 +16,12 @@ function solution(s) {
 
 solution("abcde"); //"c"
 solution("qwer"); //"we"
+
+//--------- 삼항연산자의 경우 ----------
+// 가운데값 변수 let c = Math.floor(s.length / 2)
+// s의 길이가 홀수일 경우
+// return s.length % 2 === 1
+// 짝수라면
+// ? s[c]
+// 홀수라면
+// : s.slice(c - 1, c + 1)

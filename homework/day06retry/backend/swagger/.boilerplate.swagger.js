@@ -15,7 +15,7 @@
  *                  application/json:
  *                      schema:
  *                          type: array
- *                          items: 
+ *                          items:
  *                              properties:
  *                                  number:
  *                                      type: int
@@ -29,5 +29,5 @@
  *                                  contents:
  *                                      type: string
  *                                      example: 내용입니다
- *     
+ *
  */

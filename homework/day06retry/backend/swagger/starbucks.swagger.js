@@ -15,7 +15,7 @@
  *                  application/json:
  *                      schema:
  *                          type: array
- *                          items: 
+ *                          items:
  *                              properties:
  *                                  name:
  *                                      type: string
@@ -23,5 +23,5 @@
  *                                  kcal:
  *                                      type: number
  *                                      example: 5
- *     
+ *
  */
