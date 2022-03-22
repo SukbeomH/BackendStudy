@@ -3,12 +3,13 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import cors from "cors";
+import dotenv from "dotenv";
 // Swagger 파일 아웃소싱 & 임포트
 import { options } from "./swagger/config.js";
 // 데이터 베이스 임포트
 import { usersData, coffeeData } from "./DATABASE/DB.js";
 // 휴대폰 검증 및 인증
-import { createTokenOfPhone } from "./phone/phoneApp";
+import { createTokenOfPhone } from "./phone/phoneApp.js";
 // 이메일 검증 및 환영 메일 전송
 import { createUser } from "./email/emailApp.js";
 
@@ -17,6 +18,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
+dotenv.config();
 
 // 서버가 듣고있나요?
 app.listen(port, () => {

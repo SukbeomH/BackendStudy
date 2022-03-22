@@ -1,6 +1,9 @@
 // 휴대폰 인증 토큰 전송하기
 const getValidationNumber = async () => {
 	document.querySelector("#ValidationInputWrapper").style.display = "flex";
+	await axios.post("http://localhost:3000/tokens/phone").then((req, res) => {
+		console.log(req);
+	});
 	console.log("인증 번호 전송");
 };
 
