@@ -24,16 +24,20 @@ const submitSignup = async (req, res) => {
 	const telNumber2 = document.getElementById("PhoneNumber02").value;
 	const telNumber3 = document.getElementById("PhoneNumber03").value;
 
-	await axios.post("http://localhost:3000/users", {
-		user: {
-			name: name,
-			SSN: SSN,
-			token: token,
-			preferWeb: preferWeb,
-			email: email,
-			pswd: pswd,
-			phone: "010-" + telNumber2 + "-" + telNumber3,
-		},
-	});
-	console.log("회원 가입 이메일 전송");
+	await axios
+		.post("http://localhost:3000/users", {
+			user: {
+				name: name,
+				SSN: SSN,
+				token: token,
+				preferWeb: preferWeb,
+				email: email,
+				pswd: pswd,
+				phone: "010-" + telNumber2 + "-" + telNumber3,
+			},
+		})
+		.then((res) => {
+			console.log(res);
+			console.log("회원 가입 이메일 전송");
+		});
 };

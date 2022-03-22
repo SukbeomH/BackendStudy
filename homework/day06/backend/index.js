@@ -38,30 +38,30 @@ app.get("/starbucks", (req, res) => {
 
 // 이메일 환영인사
 app.post("/users", (req, res) => {
-	const myuser = req.body.user;
-	console.log(myuser);
+	const user = req.body.user;
+	console.log(user);
 	// 1. 이메일이 정상인지 확인(1-존재여부, 2-"@"포함여부)
-	const isValid = checkValidationEmail(myuser.email);
+	const isValid = checkValidationEmail(user.email);
 	if (isValid) {
 		// 2. 가입환영 템플릿 만들기
-		const mytemplate = getWelcomeTemplate(myuser);
+		const template = getWelcomeTemplate(user);
 
 		// 3. 이메일에 가입환영 템플릿 전송하기
-		sendTemplateToEmail(myuser.email, mytemplate);
+		sendTemplateToEmail(user.email, template);
 	}
 	res.send("가입완료!!");
 });
 
 //핸드폰 인증번호 보내기
 app.post("/tokens/phone", (req, res) => {
-	const myphone = req.body.tel;
+	const phone = req.body.tel;
 	// 1. 휴대폰번호 자릿수 맞는지 확인하기
-	const isValid = checkValidationPhone(myphone);
+	const isValid = checkValidationPhone(phone);
 	if (isValid) {
 		// 2. 핸드폰 토큰 6자리 만들기
-		const mytoken = getToken();
+		const token = getToken();
 		// 3. 핸드폰번호에 토큰 전송하기
-		sendTokenToSMS(myphone, mytoken);
+		sendTokenToSMS(phone, token);
 		res.send("인증완료!!");
 	}
 });

@@ -26,7 +26,7 @@ export function getWelcomeTemplate({ name, SSN, phone, preferWeb }) {
     `;
 }
 
-export async function sendTemplateToEmail(email, mytemplate) {
+export async function sendTemplateToEmail(email, template) {
 	const appKey = process.env.NHN_EMAIL_APP_KEY;
 	const XSecretKey = process.env.NHN_EMAIL_X_SECRET_KEY;
 	const sender = process.env.NHN_EMAIL_SENDER;
@@ -36,7 +36,7 @@ export async function sendTemplateToEmail(email, mytemplate) {
 		{
 			senderAddress: `support@${sender}`,
 			title: "API test 입니다",
-			body: mytemplate,
+			body: template,
 			receiverList: [{ receiveMailAddr: email, receiveType: "MRT0" }],
 		},
 		{
