@@ -6,3 +6,21 @@
 // 제한사항
 // 문자열 s의 길이 : 50 이하의 자연수
 // 문자열 s는 알파벳으로만 이루어져 있습니다.
+
+function solution(s) {
+	let pNum = 0;
+	let yNum = 0;
+
+	const s1 = s.toLowerCase().split("");
+	for (let i = 0; i < s1.length; i++) {
+		if (s1[i] === "p") {
+			pNum++;
+		} else if (s1[i] === "y") {
+			yNum++;
+		}
+	}
+	if (pNum === yNum) {
+		return true;
+	}
+	return false;
+}
