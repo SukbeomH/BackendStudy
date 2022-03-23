@@ -14,3 +14,7 @@ function solution(x, n) {
 
 	return answer;
 }
+
+answer = new Array(n).fill(1).map((ele, idx) => {
+	return (ele + idx) * x;
+});

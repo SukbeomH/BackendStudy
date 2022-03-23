@@ -3,3 +3,12 @@
 
 // 제한 조건
 // n은 10,000,000,000이하인 자연수입니다.
+function solution(n) {
+	return n
+		.toString()
+		.split("")
+		.reverse()
+		.map((e) => e / 1);
+}
+
+solution(12345); // [5,4,3,2,1]

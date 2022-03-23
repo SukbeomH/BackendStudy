@@ -8,10 +8,15 @@
 function solution(n) {
 	var answer = 0;
 	const arr = String(n).split("");
-
 	for (let e of arr) {
 		answer += Number(e);
 	}
-
 	return answer;
 }
+
+// answer = n
+// 	.toString()
+// 	.split("")
+// 	.reduce((acc, ele) => {
+// 		return acc + Number(ele);
+// 	}, 0);

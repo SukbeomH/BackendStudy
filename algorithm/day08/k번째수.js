@@ -26,3 +26,8 @@ function solution(array, commands) {
 function sortNumber(a, b) {
 	return a - b;
 }
+
+// answer = commands.map((arr) => {
+// 	const result = array.slice(arr[0] - 1, arr[1]).sort((a, b) => a - b);
+// });
+// result[arr[2] - 1];
