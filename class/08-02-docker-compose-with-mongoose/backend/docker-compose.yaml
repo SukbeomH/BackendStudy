@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+    volumes:
+      - ./index.js:/my_backend/index.js
     ports:
       - 3000:3000
 
