@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  my_backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+
+  my_database:
+    build:
+      context: .
+      dockerfile: dockerfile.mongo
+    ports:
+      - 27017:27017
