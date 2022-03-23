@@ -10,3 +10,7 @@ function array(n) {
 }
 
 console.log(array(10)); //[ 2, 3, 2, 3, 2, 3, 2, 3, 2, 3 ]
+
+// function array2(n) {
+//     let arr Array.from(Array(n), ()=>2)
+// }
