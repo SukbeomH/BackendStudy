@@ -9,6 +9,17 @@ function solution(n) {
 		.split("")
 		.reverse()
 		.map((e) => e / 1);
+	// .map(e => Number(e))
 }
 
 solution(12345); // [5,4,3,2,1]
+
+// old fashioned way
+function solution2(n) {
+	let answer = [];
+	n = String(n);
+	for (let i = n.length - 1; i >= 0; i--) {
+		answer.push(Number(n[i]));
+	}
+	return answer;
+}

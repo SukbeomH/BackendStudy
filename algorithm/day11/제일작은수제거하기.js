@@ -20,16 +20,11 @@ function solutionF(arr) {
 }
 
 function solution(arr) {
-	const answer = [];
-	if (
-		arr.filter((ele, idx, arr) => {
-			return ele !== Math.min(...arr);
-		})
-	) {
-		console.log(arr);
-		return arr;
+	arr.splice(arr.indexOf(Math.min(...arr)), 1);
+	if (arr.length <= 1) {
+		arr = [-1];
 	}
-	return [-1];
+	return arr;
 }
 
 solution([4, 3, 2, 1]); // [4,3,2]

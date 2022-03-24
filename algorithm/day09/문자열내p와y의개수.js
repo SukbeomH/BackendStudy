@@ -24,3 +24,18 @@ function solution(s) {
 	}
 	return false;
 }
+
+//
+function solution2(s) {
+	const check = {};
+	s.toLowerCase()
+		.split("")
+		.forEach((str) => {
+			check[str] === undefined
+				? // 객체에 할당된 데이터가 없다면
+				  (check[str] = 1)
+				: // 객체에 할당된 데이터가 있다면
+				  check[str]++;
+		});
+	return check.p === check.y;
+}

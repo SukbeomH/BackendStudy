@@ -22,5 +22,38 @@ function solution(s) {
 	console.log(answer);
 	return answer;
 }
-
 solution("try hello world");
+
+function solution2(s) {
+	let answer = "";
+	// 단어별로 인덱스를 구분하기 위해서 사용
+	let idx = 0;
+	for (let i = 0; i < s.length; i++) {
+		// 공백을 찾은 경우
+		if (s[i] === " ") {
+			answer += s[i]; // === " "
+			idx = 0; // 공백이 나오면 인덱스값을 초기화
+		} else {
+			// 각 인덱스에서 짝/홀수를 대문자와 소문자화
+			answer += idx % 2 === 0 ? s[i].toUpperCase() : s[i].toLowerCase();
+			idx++;
+		}
+	}
+	return answer;
+}
+
+// 메소드를 이용한 풀이
+function solution3(s) {
+	// 2차원 배열 형태로 변환
+	const answer = s
+		.split(" ")
+		.map((str) => {
+			return str
+				.split("")
+				.map((letter, idx) => {
+					return idx % 2 === 0 ? letter.toUpperCase() : letter.toLowerCase();
+				})
+				.join("");
+		})
+		.join(" ");
+}
