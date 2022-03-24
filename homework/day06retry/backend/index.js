@@ -20,11 +20,6 @@ app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 dotenv.config();
 
-// 서버가 듣고있나요?
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
-
 // 사용자 데이터 조회
 app.get("/users", (req, res) => {
   res.send(usersData);
@@ -45,4 +40,9 @@ app.post("/tokens/phone", (req, res) => {
 app.post("/user", (req, res) => {
   createUser(req.body.email);
   res.send("인증완료");
+});
+
+// 서버가 듣고있나요?
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });
