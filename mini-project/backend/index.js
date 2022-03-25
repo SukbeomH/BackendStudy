@@ -7,6 +7,8 @@ import { Token } from "./models/token.model.js";
 import { getToken, sendToPhone } from "./phone/phone.system.js";
 import { User } from "./models/user.model.js";
 import { getOpenGraph } from "./prefer/prefer.scrap.js";
+//이메일 전송
+import { sendTemplateToEmail, getWelcomeTemplate } from "./email/email.js";
 // 라이브러리 사용설정
 const app = express();
 dotenv.config();
@@ -74,12 +76,21 @@ app.post("/user", async (req, res) => {
 		const userSubmit = await new User({
 			name: req.body.name,
 			email: req.body.email,
-			personal: req.body.personal,
+			// 주민등록번호는 뒷자리를 전부 *로 바꿔 저장
+			personal: req.body.personal.split("").fill("*", -7).join(""),
+			// 좋아하는 사이트의 OG 메타정보를 스크랩, 오브젝트로 DB에 저장
 			prefer: getOpenGraph(req.body.prefer),
 			pwd: req.body.pwd,
 			phone: req.body.phone,
 		});
+		// 가공한 데이터를 데이터베이스에 저장
 		await userSubmit.save();
+		// 회원 가입 환영 이메일을 전송
+		await sendTemplateToEmail(
+			req.body.email,
+			getWelcomeTemplate(req.body.name, req.body.phone, req.body.prefer)
+		);
+		await res.send(User.get(_id));
 	} else {
 		// 번호가 없거나 인증이 완료되지 않았다면
 		res.status(422).send("에러 : 핸드폰번호가 인증되지 않았습니다");

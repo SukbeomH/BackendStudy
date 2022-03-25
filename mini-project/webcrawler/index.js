@@ -1,5 +1,7 @@
 import puppeteer from "puppeteer";
 import mongoose from "mongoose";
+import cheerio from "cheerio";
+import axios from "axios";
 import { Starbucks } from "./models/starbucks.model.js";
 
 // 몽고디비 접속
@@ -36,18 +38,3 @@ async function espressoCrawling() {
 }
 // 대상에 대해 크롤링을 시작한다
 espressoCrawling();
-
-// cold brew image i
-// `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(2) > ul > li:nth-child(${i}) > dl > dt > a > img`
-// cold brew name i
-// `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(2) > ul > li:nth-child(${i}) > dl > dd`
-
-// espresso name i
-// `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(6) > ul > li:nth-child(${i}) > dl > dd`
-// espresso image i
-// `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(6) > ul > li:nth-child(${i}) > dl > dt > a > img`
-
-// tea name i
-// `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(14) > ul > li:nth-child(${i}) > dl > dd`
-// tea image i
-// `#container > div.content > div.product_result_wrap.product_result_wrap01 > div > dl > dd:nth-child(2) > div.product_list > dl > dd:nth-child(14) > ul > li:nth-child(${i}) > dl > dt > a > img`

@@ -5,6 +5,8 @@
 	"license": "MIT",
 	"type": "module",
 	"dependencies": {
+		"axios": "^0.26.1",
+		"cheerio": "^1.0.0-rc.10",
 		"mongoose": "^6.2.8",
 		"puppeteer": "^13.5.1"
 	}
