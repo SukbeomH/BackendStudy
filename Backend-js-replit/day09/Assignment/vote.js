@@ -1,19 +1,19 @@
 //assignment
 function vote(str) {
-	// 아래에 코드를 작성해주세요.
-	let answer = new Map();
+	// -----------------------------------------
+	let result = new Map();
 	for (let s of str) {
-		answer.set(s, 0);
+		result.set(s, 0);
 	}
 	for (let s of str) {
-		answer.set(s, answer.get(s) + 1);
-	}
+		result.set(s, result.get(s) + 1);
+	} // --------------------------------------
 	let vote = [];
-	for (let v of answer.values()) {
+	for (let v of result.values()) {
 		vote.push(v);
 	}
 	let name = [];
-	for (let n of answer.keys()) {
+	for (let n of result.keys()) {
 		name.push(n);
 	}
 	return name[Math.max(parseInt(vote.join())) - 1];

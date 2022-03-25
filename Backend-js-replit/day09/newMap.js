@@ -20,8 +20,16 @@ function classification(str) {
 	map.set("A", map.get("A") + aN);
 	map.set("B", map.get("B") + bN);
 	map.set("C", map.get("C") + cN);
-	// map.set("A", map.get("A") + aN);
 	return map;
 }
 var str = "ABCCCAA";
 console.log(classification(str)); //Map(3){'A' => 4, 'B' => 3, 'C' => 6}
+
+function classification2(str) {
+	let map = new Map([
+		["A", 1],
+		["B", 2],
+		["C", 3],
+	]);
+	return map;
+}
