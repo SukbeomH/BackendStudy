@@ -2,10 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import { Token } from "./models/token.model.js";
 // 휴대폰 검증 및 인증
-import { getToken, sendToPhone } from "./phone/phoneSystem.js";
+import { Token } from "./models/token.model.js";
+import { getToken, sendToPhone } from "./phone/phone.system.js";
 import { User } from "./models/user.model.js";
+import { getOpenGraph } from "./prefer/prefer.scrap.js";
 // 라이브러리 사용설정
 const app = express();
 dotenv.config();
@@ -30,7 +31,7 @@ app.post("/tokens/phone", async (req, res) => {
 		await res.send("인증번호 " + tokenMade + " 재전송됨");
 	} else {
 		// 전화번호가 없으면 처음요청이므로 저장한다.
-		const saving = new Token({
+		const saving = await new Token({
 			phone: phoneN,
 			token: tokenMade,
 			isAuth: false,
@@ -65,12 +66,30 @@ app.patch("/tokens/phone", async (req, res) => {
 // 회원가입 API
 app.post("/user", async (req, res) => {
 	// 입력된 핸드폰 번호가 DB에 있는가
+	if (
+		(await User.exists({ isAuth: true })) &&
+		(await User.exists({ phone: req.body.phone }))
+	) {
+		// 번호도 있고 인증도 올바르게 되었다면 새 유저 생성
+		const userSubmit = await new User({
+			name: req.body.name,
+			email: req.body.email,
+			personal: req.body.personal,
+			prefer: getOpenGraph(req.body.prefer),
+			pwd: req.body.pwd,
+			phone: req.body.phone,
+		});
+		await userSubmit.save();
+	} else {
+		// 번호가 없거나 인증이 완료되지 않았다면
+		res.status(422).send("에러 : 핸드폰번호가 인증되지 않았습니다");
+	}
 });
 
 // 몽구스를 통해 몽고DB에 연결(도커)
-// mongoose.connect("mongodb://my_database:27017/token");
+// mongoose.connect("mongodb://my_database:27017/miniproject");
 // 몽구스를 통해 몽고DB에 연결(로컬)
-mongoose.connect("mongodb://localhost:27017/token");
+mongoose.connect("mongodb://localhost:27017/miniproject");
 // 최종적으로 백엔드 API 서버 오픈, Listen~
 app.listen(3000, () => {
 	console.log(`Example app listening on port ${3000}`);
