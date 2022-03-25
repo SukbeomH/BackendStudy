@@ -10,15 +10,51 @@
 // 6→3→10→5→16→8→4→2→1 이 되어 총 8번 만에 1이 됩니다.
 // 위 작업을 몇 번이나 반복해야하는지 반환하는 함수, solution을 완성해 주세요.
 // 단, 작업을 500번을 반복해도 1이 되지 않는다면 –1을 반환해 주세요.
+function Collatz(num) {
+	for (let i = 1; num !== 1; i++) {
+		if (num % 2 === 0) {
+			num = num / 2;
+		} else {
+			num = num * 3 + 1;
+		}
+		if (num === 1) {
+			return i;
+		}
+	}
+}
+function solution2(num) {
+	if (Collatz(num) > 500) {
+		return -1;
+	}
+	return Collatz(num);
+}
+solution2(6); // 8
 
 function solution(num) {
 	let i;
-	for (i = 1; true; i++) {
+	for (i = 0; num !== 1; i++) {
 		if (num % 2 === 0) {
-			return num / 2;
+			num = num / 2;
+		} else {
+			num = num * 3 + 1;
 		}
-		return num * 3 + 1;
 	}
-	num <= 500 ? i : -1;
+	if (num === 1 && i <= 500) {
+		return i;
+	}
+	return -1;
 }
 solution(6); // 8
+
+function collatzSolution(num) {
+	let answer = 0;
+	while (num !== 1 && answer !== 500) {
+		if (num % 2 === 0) {
+			num = num / 2;
+		} else {
+			num = num * 3 + 1;
+		}
+		answer++;
+	}
+	return num === 1 ? answer : -1;
+}
