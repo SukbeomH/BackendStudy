@@ -2,7 +2,12 @@
 const getValidationNumber = async () => {
 	document.querySelector("#ValidationInputWrapper").style.display = "flex";
 	await axios
-		.post("http://localhost:3000/tokens/phone")
+		.post("http://localhost:3000/tokens/phone", {
+			phone:
+				document.getElementById("PhoneNumber01").value +
+				document.getElementById("PhoneNumber02").value +
+				document.getElementById("PhoneNumber03").value,
+		})
 		.then((req, res) => {
 			console.log(req);
 		})
@@ -34,7 +39,7 @@ const submitToken = async () => {
 // 회원 가입 API 요청
 const submitSignup = async () => {
 	await axios
-		.post("http://localhost:3000//user", {
+		.post("http://localhost:3000/user", {
 			name: document.getElementById("SignupName").value,
 			email: document.getElementById("SignupEmail").value,
 			personal:

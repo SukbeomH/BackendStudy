@@ -1,7 +1,7 @@
 import { getToday } from "../utils/utils.js";
 import axios from "axios";
 
-function getWelcomeTemplate({ name, phone, prefer }) {
+export function getWelcomeTemplate({ name, phone, prefer }) {
 	return `
         <html>
             <body>

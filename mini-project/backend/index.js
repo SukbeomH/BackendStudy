@@ -19,7 +19,7 @@ app.use(cors());
 app.post("/tokens/phone", async (req, res) => {
 	const phoneN = req.body.phone;
 	//토큰 제작
-	const tokenMade = await getToken();
+	const tokenMade = getToken();
 	// 전화번호가 이미 데이터베이스에 있는지 확인
 	if (await Token.exists({ phone: phoneN })) {
 		// 전화번호가 데이터베이스에 있으므로 전화번호를 기준으로 토큰을 업데이트한다.
@@ -30,7 +30,7 @@ app.post("/tokens/phone", async (req, res) => {
 		//인증번호를 보낸다
 		await sendToPhone(phoneN, tokenMade);
 		// 번호 확인용 반응
-		await res.send("인증번호 " + tokenMade + " 재전송됨");
+		res.send(phoneN + "으로 인증번호 " + tokenMade + " 재전송됨");
 	} else {
 		// 전화번호가 없으면 처음요청이므로 저장한다.
 		const saving = await new Token({
@@ -42,7 +42,7 @@ app.post("/tokens/phone", async (req, res) => {
 		//인증번호를 보낸다
 		await sendToPhone(phoneN, tokenMade);
 		// 번호 확인용 반응
-		await res.send("인증번호 " + tokenMade + " 최초 전송됨");
+		res.send("인증번호 " + tokenMade + " 최초 전송됨");
 	}
 });
 
@@ -59,9 +59,9 @@ app.patch("/tokens/phone", async (req, res) => {
 			{ $set: { isAuth: true } }
 		);
 		// true를 되돌려보낸다.
-		await res.send(true);
+		res.send(true);
 	} else {
-		await res.send(false);
+		res.send(false);
 	}
 });
 
@@ -69,8 +69,8 @@ app.patch("/tokens/phone", async (req, res) => {
 app.post("/user", async (req, res) => {
 	// 입력된 핸드폰 번호가 DB에 있는가
 	if (
-		(await User.exists({ isAuth: true })) &&
-		(await User.exists({ phone: req.body.phone }))
+		(await Token.exists({ phone: req.body.phone })) &&
+		(await Token.exists({ isAuth: true }))
 	) {
 		// 번호도 있고 인증도 올바르게 되었다면 새 유저 생성
 		const userSubmit = await new User({
@@ -90,7 +90,8 @@ app.post("/user", async (req, res) => {
 			req.body.email,
 			getWelcomeTemplate(req.body.name, req.body.phone, req.body.prefer)
 		);
-		await res.send(User.get(_id));
+		const id = await userSubmit.get("_id");
+		res.send(id);
 	} else {
 		// 번호가 없거나 인증이 완료되지 않았다면
 		res.status(422).send("에러 : 핸드폰번호가 인증되지 않았습니다");
