@@ -5,9 +5,9 @@ import axios from "axios";
 import { Starbucks } from "./models/starbucks.model.js";
 
 // 몽고디비 접속
-mongoose.connect("mongodb://localhost:27017/db");
+mongoose.connect("mongodb://localhost:27017/miniproject");
 // 대상에 대해 크롤링을 하는 함수
-async function espressoCrawling() {
+export async function espressoCrawling() {
 	// 헤드리스 옵션으로 브라우져 보일지 여부 결정 (true: 안보임)
 	const browser = await puppeteer.launch({ headless: true });
 	// 새페이지를 연다
@@ -28,13 +28,12 @@ async function espressoCrawling() {
 		);
 		const starbucks = await new Starbucks({
 			name: name,
-			image: image, //이미지 소스 받아서 잘 넘겨야함
+			img: image, //이미지 소스 받아서 잘 넘겨야함
 		});
+		console.log(image);
 		await starbucks.save();
-		console.log(name + "  " + image);
 	} // ---------------------------------------------------------------
 	// 종료한다
 	await browser.close();
 }
-// 대상에 대해 크롤링을 시작한다
 espressoCrawling();

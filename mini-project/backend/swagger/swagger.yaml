@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: MiniProject
+  version: 1.0.0
+  contact: { email: "brent93.dev@gmail.com" }
+servers:
+  - url: http://localhost:3000
+paths:
+  /tokens/phone:
+    post:
+      tags:
+        - General
+      summary: http://localhost:3000/tokens/phone
+      description: Send the Phone number to get Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                phone: "01066136228"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - General
+      summary: http://localhost:3000/tokens/phone
+      description: Complete the Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                phone: "01066136228"
+                token: "962137"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /user:
+    post:
+      tags:
+        - General
+      summary: http://localhost:3000/user
+      description: Resigster New User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: 다나와
+                email: brenthong93@gmail.com
+                personal: 930101-1111111
+                prefer: http://www.danawa.com/
+                pwd: "1234"
+                phone: "01066136228"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users:
+    get:
+      tags:
+        - General
+      summary: http://localhost:3000/users
+      description: Get users list
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /starbucks:
+    get:
+      tags:
+        - General
+      summary: http://localhost:3000/starbucks
+      description: Get coffee list
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}

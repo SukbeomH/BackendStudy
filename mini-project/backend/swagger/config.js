@@ -7,5 +7,5 @@ export const options = {
 			contact: { email: "brent93.dev@gmail.com" },
 		},
 	},
-	apis: ["./swagger/*.swagger.js"], // files containing annotations as above
+	apis: ["./swagger/swagger.yaml"], // files containing annotations as above
 };

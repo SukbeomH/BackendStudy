@@ -36,7 +36,7 @@ app.post("/tokens/phone", async (req, res) => {
 		//인증번호를 보낸다
 		await sendToPhone(phoneN, tokenMade);
 		// 번호 확인용 반응
-		res.send(phoneN + "으로 인증번호 " + tokenMade + " 재전송됨");
+		res.send(phoneN + "으로 인증번호 재전송됨");
 	} else {
 		// 전화번호가 없으면 처음요청이므로 저장한다.
 		const saving = await new Token({
@@ -48,7 +48,7 @@ app.post("/tokens/phone", async (req, res) => {
 		//인증번호를 보낸다
 		await sendToPhone(phoneN, tokenMade);
 		// 번호 확인용 반응
-		res.send("인증번호 " + tokenMade + " 최초 전송됨");
+		res.send(phoneN + "으로 인증번호 최초 전송됨");
 	}
 });
 
@@ -116,9 +116,9 @@ app.get("/starbucks", async (req, res) => {
 });
 
 // 몽구스를 통해 몽고DB에 연결(도커)
-mongoose.connect("mongodb://my_database:27017/miniproject");
+// mongoose.connect("mongodb://my_database:27017/miniproject");
 // 몽구스를 통해 몽고DB에 연결(로컬)
-// mongoose.connect("mongodb://localhost:27017/miniproject");
+mongoose.connect("mongodb://localhost:27017/miniproject");
 // 최종적으로 백엔드 API 서버 오픈, Listen~
 app.listen(3000, () => {
 	console.log(`Example app listening on port ${3000}`);
