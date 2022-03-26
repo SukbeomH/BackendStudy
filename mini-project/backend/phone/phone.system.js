@@ -25,19 +25,23 @@ export async function sendToPhone(phone, result) {
 	const appSecretKey = process.env.NHN_SMS_X_SECRET_KEY;
 	const sender = process.env.NHN_SMS_SENDER;
 
-	await axios.post(
-		`https://api-sms.cloud.toast.com/sms/v3.0/appKeys/${appKeys}/sender/sms`,
-		{
-			body: `개발자 석범이의 테스트 문자, 인증번호는 ${result}`,
-			sendNo: sender,
-			recipientList: [{ recipientNo: phone }],
-		},
-		{
-			headers: {
-				"Content-Type": "application/json;charset=UTF-8",
-				"X-Secret-Key": appSecretKey,
+	await axios
+		.post(
+			`https://api-sms.cloud.toast.com/sms/v3.0/appKeys/${appKeys}/sender/sms`,
+			{
+				body: `개발자 석범이의 테스트 문자, 인증번호는 ${result}`,
+				sendNo: sender,
+				recipientList: [{ recipientNo: phone }],
 			},
-		}
-	);
+			{
+				headers: {
+					"Content-Type": "application/json;charset=UTF-8",
+					"X-Secret-Key": appSecretKey,
+				},
+			}
+		)
+		.catch(function (error) {
+			console.log(error);
+		});
 	console.log(phone + " 으로 인증번호 " + result + " 를 전송합니다.");
 }
