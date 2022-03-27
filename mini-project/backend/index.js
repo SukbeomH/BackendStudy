@@ -64,7 +64,7 @@ app.patch("/tokens/phone", async (req, res) => {
 			{ phone: req.body.phone },
 			{ $set: { isAuth: true } }
 		);
-		// true를 되돌려보낸다.
+		// 결과를 돌려보낸다.
 		res.send(true);
 	} else {
 		res.send(false);
@@ -116,9 +116,9 @@ app.get("/starbucks", async (req, res) => {
 });
 
 // 몽구스를 통해 몽고DB에 연결(도커)
-// mongoose.connect("mongodb://my_database:27017/miniproject");
+mongoose.connect("mongodb://my_database:27017/miniproject");
 // 몽구스를 통해 몽고DB에 연결(로컬)
-mongoose.connect("mongodb://localhost:27017/miniproject");
+// mongoose.connect("mongodb://localhost:27017/miniproject");
 // 최종적으로 백엔드 API 서버 오픈, Listen~
 app.listen(3000, () => {
 	console.log(`Example app listening on port ${3000}`);
