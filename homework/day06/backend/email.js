@@ -10,14 +10,13 @@ export function checkValidationEmail(email) {
 	}
 }
 
-export function getWelcomeTemplate({ name, SSN, phone, preferWeb }) {
+export function getWelcomeTemplate({ name, phone, preferWeb }) {
 	return `
         <html>
             <body>
                 <h1>${name}님 가입을 환영합니다!!!</h1>
                 <hr />
                 <div>이름: ${name}</div>
-                <div>주민등록번호: ${SSN}세</div>
                 <div>핸드폰번호: ${phone}}</div>
                 <div>좋아하는 사이트: ${preferWeb}</div>
                 <div>가입일: ${getToday()}</div>
