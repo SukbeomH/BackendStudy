@@ -11,9 +11,18 @@
 
 function solution(arr) {
 	numberSet = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+	let answer = 0;
+	for (let i = 0; i < numberSet.length; i++) {
+		if (!arr.includes(numberSet[i])) {
+			answer = answer + numberSet[i];
+		}
+	}
 	return answer;
 }
 
 solution([1, 2, 3, 4, 6, 7, 8, 0]); // 14
 solution([5, 8, 4, 0, 6, 7, 9]); // 6
+
+function solution2(numbers) {
+	return 45 - numbers.reduce((cur, acc) => cur + acc, 0);
+}
