@@ -11,7 +11,7 @@
 
 function solution(n) {
 	if (Number.isInteger(Math.sqrt(n))) {
-		return (Math.sqrt(n) + 1) * (Math.sqrt(n) + 1);
+		return (Math.sqrt(n) + 1) ** 2;
 	}
 	return -1;
 }
@@ -22,3 +22,13 @@ solution(3); // -1
 // var root = Math.sqrt(n);
 // var result = parseInt(root) - root === 0 ? (root + 1 ) * (root + 1) : "no";
 // result;
+
+function solution2(n) {
+	let answer = 1; // 최초식
+	// 조건식
+	while (answer ** 2 < n) {
+		//증감식
+		answer++;
+	}
+	return answer ** 2 === n ? (answer + 1) ** 2 : -1;
+}
