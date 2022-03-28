@@ -73,6 +73,15 @@
  *               type: string
  *               example:
  *                 624049d34ccad6d254e0f479
+ *       responses:
+ *         "422":
+ *           description: Token Auth error
+ *           content:
+ *             application/json:
+ *              schema:
+ *               type: string
+ *               example:
+ *                 에러 : 핸드폰번호가 인증되지 않았습니다
  * /users:
  *     get:
  *       tags:
