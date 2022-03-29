@@ -33,18 +33,4 @@ function solutionSlow(participant, completion) {
 }
 
 // 이중 For 문 + splice + break + for
-function solution(participant, completion) {
-	for (let e of completion) {
-		for (let i in participant) {
-			if (participant[i] === e) {
-				participant.splice(i, 1, "1");
-				break;
-			}
-		}
-	}
-	for (let j of participant) {
-		if (j !== "1") {
-			return j.toString();
-		}
-	}
-}
+function solution(participant, completion) {}
