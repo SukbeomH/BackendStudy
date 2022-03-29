@@ -22,3 +22,15 @@ function solution(n) {
 
 solution([2, 1, 3, 4, 1]); // [2,3,4,5,6,7]
 solution([5, 0, 2, 7]); // [2,5,7,9,12]
+
+// class
+function solutionC(num) {
+	const answer = new Set([]);
+	num.forEach((ele, idx) => {
+		num.slice(i + 1).forEach((ele2) => {
+			const sum = ele + ele2;
+			answer.add(sum);
+		});
+	});
+	return [...answer].sort((a, b) => a - b);
+}

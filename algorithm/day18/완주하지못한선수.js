@@ -17,6 +17,11 @@
 // 참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
 // 참가자 중에는 동명이인이 있을 수 있습니다.
 
+// failed
+function solutionF(participant, completion) {
+	return participant.filter((e) => completion.includes(e)).toString();
+}
+
 // Slow
 function solutionSlow(participant, completion) {
 	for (let e of completion) {
@@ -27,7 +32,19 @@ function solutionSlow(participant, completion) {
 	return participant.toString();
 }
 
-// failed
-function solutionF(participant, completion) {
-	return participant.filter((e) => completion.includes(e)).toString();
+// 이중 For 문 + splice + break + for
+function solution(participant, completion) {
+	for (let e of completion) {
+		for (let i in participant) {
+			if (participant[i] === e) {
+				participant.splice(i, 1, "1");
+				break;
+			}
+		}
+	}
+	for (let j of participant) {
+		if (j !== "1") {
+			return j.toString();
+		}
+	}
 }
