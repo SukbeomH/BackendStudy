@@ -1,6 +1,6 @@
 # compiled output
-dist
-node_modules
+/dist
+/node_modules
 
 # Logs
 logs
@@ -14,9 +14,6 @@ lerna-debug.log*
 # OS
 .DS_Store
 
-# personal
-.env
-
 # Tests
 /coverage
 /.nyc_output
@@ -29,3 +26,10 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
