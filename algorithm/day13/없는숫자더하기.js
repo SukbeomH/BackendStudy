@@ -26,3 +26,12 @@ solution([5, 8, 4, 0, 6, 7, 9]); // 6
 function solution2(numbers) {
 	return 45 - numbers.reduce((cur, acc) => cur + acc, 0);
 }
+
+function solution3(num) {
+	let answer;
+	for (let i = 1; i <= 9; i++) {
+		if (num.includes(i)) {
+			return (answer += i);
+		}
+	}
+}

@@ -29,8 +29,69 @@ function solutionSlow(participant, completion) {
 			participant.splice(participant.indexOf(e), 1);
 		}
 	}
+	console.log(participant.toString());
 	return participant.toString();
 }
+solutionSlow([], []);
 
-// 이중 For 문 + splice + break + for
-function solution(participant, completion) {}
+// sort ---------------------------------------------- Done!
+function solution(participant, completion) {
+	const sortP = participant.sort();
+	const sortC = completion.sort();
+	let answer;
+
+	for (let i = 0; i < sortP.length; i++) {
+		if (sortP[i] !== sortC[i]) {
+			answer = sortP[i];
+			return answer;
+		}
+	}
+}
+
+// object
+function solutionO(participant, completion) {
+	const objP = { ...participant };
+	const objC = { ...completion };
+
+	for (let i in objC) {
+		for (let j in objP) {
+			if (objC[i] !== objP[j]) {
+				return objP[j].toString();
+			}
+		}
+	}
+}
+
+// ---------------------------------------
+function solution(participant, completion) {
+	const map = new Map();
+	for (let i = 0; i < participant.length; i++) {
+		let a = participant[i],
+			b = completion[i];
+		map.set(a, (map.get(a) || 0) + 1);
+		map.set(b, (map.get(b) || 0) - 1);
+	}
+	for (let [k, v] of map) {
+		if (v > 0) return k;
+	}
+	return "nothing";
+}
+
+// hash
+function solution(participant, completion) {
+	const hash = {};
+
+	for (let val of participant) {
+		if (!hash[val]) {
+			hash[val] = 0;
+		}
+		hash[val]++;
+	}
+	completion.forEach((val) => hash[val]--);
+
+	for (let key in hash) {
+		if (hash[key]) {
+			return key;
+		}
+	}
+}
