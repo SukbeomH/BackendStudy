@@ -29,3 +29,13 @@ arr2 = [
 // [[4,6],[7,9]]
 
 solution(arr1, arr2);
+
+// ------------ map
+function solution2(arr1, arr2) {
+	const answer = arr1.map((num1, i) => {
+		return num1.map((num2, j) => {
+			return num2 + arr2[i][j];
+		});
+	});
+	return answer;
+}

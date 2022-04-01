@@ -17,6 +17,51 @@
 // 가장 높은 점수를 받은 사람이 여럿일 경우, return하는 값을 오름차순 정렬해주세요.
 
 function solution(answers) {
-	var answer = [];
-	return answer;
+	let answer = [];
+	let one = [1, 2, 3, 4, 5]; // 5
+	let oneCorrect = 0;
+	let two = [2, 1, 2, 3, 2, 4, 2, 5]; // 8
+	let twoCorrect = 0;
+	let three = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]; // 10
+	let threeCorrect = 0;
+
+	// one의 경우
+	for (one; one.length < answers.length + 5; one.push(1, 2, 3, 4, 5)) {}
+	for (let i = 0; i < answers.length; i++) {
+		if (one[i] === answers[i]) {
+			oneCorrect++;
+		}
+	}
+	// two의 경우
+	for (
+		two;
+		two.length < answers.length + 8;
+		two.push(2, 1, 2, 3, 2, 4, 2, 5)
+	) {}
+	for (let i = 0; i < answers.length; i++) {
+		if (two[i] === answers[i]) {
+			twoCorrect++;
+		}
+	}
+	// three의 경우
+	for (
+		three;
+		three.length < answers.length;
+		three.push(3, 3, 1, 1, 2, 2, 4, 4, 5, 5)
+	) {}
+	for (let i = 0; i < answers.length + 10; i++) {
+		if (three[i] === answers[i]) {
+			threeCorrect++;
+		}
+	}
+	let result = [];
+	const max = Math.max(oneCorrect, twoCorrect, threeCorrect);
+	answer = [oneCorrect, twoCorrect, threeCorrect];
+	for (let i = 0; i < 3; i++) {
+		if (max === answer[i]) {
+			result.push(i + 1);
+		}
+	}
+
+	return result;
 }
