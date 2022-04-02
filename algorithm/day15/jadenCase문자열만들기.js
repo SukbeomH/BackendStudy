@@ -32,12 +32,3 @@ function solution2(s) {
 		.join(" ");
 	return answer;
 }
-
-// function solutionF(s) {
-// 	return s
-// 		.split(" ")
-// 		.map((v) => {
-// 			v.charAt(0).toUpperCase() + v.substring(1).toLowerCase();
-// 		})
-// 		.join(" ");
-// }

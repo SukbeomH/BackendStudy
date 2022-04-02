@@ -17,22 +17,14 @@
 // z.charCodeAt() : 122
 // A.charCodeAt() : 65
 // Z.charCodeAt() : 90
+
+//
 function solution(s, n) {
-	let answer = s.split(" ").map((e1, i1, a1) => {
-		e1.split("").map((e2, i2, a2) => {
-			if (e2.charCodeAt() < 95) {
-				return String.fromCharCode(((e2.charCodeAt() + n) % 24) + 73);
-			} else {
-				return String.fromCharCode(((e2.charCodeAt() + n) % 24) + 96);
-			}
-		});
-		return Array(e1);
-	});
-	return answer.join(" ").toString();
+	const word = s.split(" ");
 }
 
 // s = "hello world"
-function solution(s, n) {
+function solutionF(s, n) {
 	const word = s.split(" ");
 	const mapS = new Map();
 
@@ -40,4 +32,26 @@ function solution(s, n) {
 		mapS.set(word.charCodeAt(), i);
 	}
 	console.log(mapS);
+}
+
+// map
+function solutionF(s, n) {
+	let answer = s
+		.split(" ")
+		.map((e1) => {
+			e1.split("")
+				.map((e2) => {
+					let char = e2.charCodeAt();
+					if (char < 95) {
+						return String.fromCharCode(((char + n - 65) % 24) + 65);
+					} else {
+						return String.fromCharCode(((char + n - 97) % 24) + 97);
+					}
+				})
+				.join("");
+			return e1;
+		})
+		.join(" ")
+		.toString();
+	return answer;
 }

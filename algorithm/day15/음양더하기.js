@@ -22,3 +22,11 @@ function solution(absolutes, signs) {
 	});
 	return answer;
 }
+
+// ----------------------- reduce ----------------------
+function solution2(absolutes, signs) {
+	const answer = absolutes.reduce((acc, cur, i) => {
+		return acc + (signs[i] ? cur : -cur);
+	});
+	return answer;
+}
