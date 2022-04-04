@@ -21,7 +21,7 @@ import { Board } from './apis/boards/entities/board.entity';
       username: 'root',
       password: 'root',
       database: 'mydocker02',
-      entities: [Board],
+      entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
         retryDelay: 5000,
