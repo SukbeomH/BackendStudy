@@ -37,7 +37,9 @@ function solution(s) {
 
 	for (let i = 0; i < s.length; i++) {
 		if (temp.includes(str[i])) {
-			temp = temp.replaceAll(str[i], String(i));
+			for (let j = 0; j < 18; j++) {
+				temp = temp.replace(str[i], str.indexOf(str[i]));
+			}
 		}
 	}
 	return Number(temp);
