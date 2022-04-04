@@ -24,6 +24,8 @@ import { Board } from './apis/boards/entities/board.entity';
       entities: [Board],
       synchronize: true,
       logging: true,
+        retryDelay: 5000,
+      retryAttempts: 15
     }),
   ],
   // controllers: [AppController],
