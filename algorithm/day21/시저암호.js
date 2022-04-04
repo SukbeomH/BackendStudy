@@ -20,7 +20,22 @@
 
 //
 function solution(s, n) {
-	const word = s.split(" ");
+	let temp = s;
+	let answer = [];
+	for (let i = 0; i < s.length; i++) {
+		temp = temp.replace(" ", 0);
+	}
+	temp.split("").forEach((e) => {
+		let char = e.charCodeAt();
+		if (char === 48) {
+			answer.push(" ");
+		} else if (char < 95) {
+			answer.push(String.fromCharCode(((char + n - 65) % 26) + 65));
+		} else {
+			answer.push(String.fromCharCode(((char + n - 97) % 26) + 97));
+		}
+	});
+	return answer.join("");
 }
 
 // s = "hello world"
@@ -43,13 +58,13 @@ function solutionF(s, n) {
 				.map((e2) => {
 					let char = e2.charCodeAt();
 					if (char < 95) {
-						return String.fromCharCode(((char + n - 65) % 24) + 65);
+						return String.fromCharCode(((char + n - 65) % 26) + 65);
 					} else {
-						return String.fromCharCode(((char + n - 97) % 24) + 97);
+						return String.fromCharCode(((char + n - 97) % 26) + 97);
 					}
 				})
 				.join("");
-			return e1;
+			return;
 		})
 		.join(" ")
 		.toString();

@@ -38,3 +38,16 @@ function getDayName(a, b) {
 	var date = new Date(2016, a - 1, b);
 	return date.toString().slice(0, 3).toUpperCase();
 }
+
+function solutionClass(a, b) {
+	const answer = new Array(a).fill(1).reduce((cc, cur, i) => {
+		const mn = cur + i;
+		return (
+			acc +
+			// month는 각 월의 일수를 가지는 오브젝트
+			(mn !== a ? month[mn] : b)
+		);
+	}, 0);
+	// week 은 각 날짜를 가지고 있는 어레이
+	return week[answer % 7];
+}
