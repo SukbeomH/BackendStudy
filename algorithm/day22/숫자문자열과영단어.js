@@ -35,7 +35,7 @@ function solution(s) {
 		"nine",
 	];
 
-	for (let i = 0; i < s.length; i++) {
+	for (let i = 0; i < str.length; i++) {
 		if (temp.includes(str[i])) {
 			for (let j = 0; j < 18; j++) {
 				temp = temp.replace(str[i], str.indexOf(str[i]));
