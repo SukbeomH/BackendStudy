@@ -11,13 +11,19 @@
 function solution(nums) {
 	let sum = [];
 	for (let i = 0; i < nums.length; i++) {
-		for (let j = 0; j < nums.length; j++) {
-			for (let k = 0; k < nums.length; k++) {
+		for (let j = i + 1; j < nums.length; j++) {
+			for (let k = j + 1; k < nums.length; k++) {
 				sum.push(nums[i] + nums[j] + nums[k]);
 			}
-			nums.splice(j, 1);
 		}
-		nums.splice(i, 1);
 	}
-	return sum;
+	return (
+		sum
+			.map((ele) => {
+				for (let i = 2; i < Math.sqrt(ele); i++) {
+					ele % i === 0;
+				}
+			})
+			.filter((e) => false).length - 1
+	);
 }
