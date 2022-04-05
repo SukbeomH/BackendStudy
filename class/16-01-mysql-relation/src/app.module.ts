@@ -3,16 +3,12 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { BoardModule } from './apis/boards/boards.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductCategoryModule } from './apis/productsCategory/productCategory.module';
-import { ProductModule } from './apis/products/product.module';
 // import { AppController } from './app.controller';
 // import { AppService } from './app.service';
 
 @Module({
   imports: [
-    ProductModule,
     BoardModule,
-    ProductCategoryModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql',
@@ -22,7 +18,7 @@ import { ProductModule } from './apis/products/product.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '12345678',
       database: 'myproject02',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
