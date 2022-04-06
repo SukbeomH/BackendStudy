@@ -17,11 +17,6 @@
 // 참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
 // 참가자 중에는 동명이인이 있을 수 있습니다.
 
-// failed
-function solutionF(participant, completion) {
-	return participant.filter((e) => completion.includes(e)).toString();
-}
-
 // Slow
 function solutionSlow(participant, completion) {
 	for (let e of completion) {
@@ -29,10 +24,8 @@ function solutionSlow(participant, completion) {
 			participant.splice(participant.indexOf(e), 1);
 		}
 	}
-	console.log(participant.toString());
 	return participant.toString();
 }
-solutionSlow([], []);
 
 // sort ---------------------------------------------- Done!
 function solution(participant, completion) {
@@ -46,6 +39,17 @@ function solution(participant, completion) {
 			return answer;
 		}
 	}
+}
+
+// filter ---------------------------------------------- Done!
+function solution(participant, completion) {
+	const sortP = participant.sort();
+	const sortC = completion.sort();
+
+	let answer;
+	return (answer = sortP.filter((e, i) => {
+		return e !== sortC[i];
+	})[0]);
 }
 
 // object
