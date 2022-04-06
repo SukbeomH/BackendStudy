@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function myCallback() {
+            const xml0 = new XMLHttpRequest()
+            xml0.open("get", "http://numbersapi.com/random?min=1&max=200")
+            xml0.send()
+            xml0.addEventListener("load", (res) => {
+                console.log("첫번째");
+                const num = res.target.response.split(" ")[0]
+                const xml1 = new XMLHttpRequest()
+                xml1.open("get", `https://koreanjson.com/posts/${num}`)
+                xml1.send()
+                xml1.addEventListener("load", (res) => {
+                    console.log("두번째");
+                    const userId = JSON.parse(res.target.response).UserId
+                    const xml3 = new XMLHttpRequest()
+                    xml3.open("get", `https://koreanjson.com/posts?userId=${userId}`)
+                    xml3.send()
+                    xml3.addEventListener("load", (res) => {
+                        console.log("세번째");
+                        console.log(res.target.response)
+                    });
+                });
+            });
+        }
+
+        function myPromise() {
+            axios.get("http://numbersapi.com/random?min=1&max=200")
+                .then((res) => {
+                    const num = res.data.split(" ")[0]
+                    return axios.get(`https://koreanjson.com/posts/${num}`)
+                }).then((res) => {
+                    const userId = res.data.UserId
+                    return axios.get(`https://koreanjson.com/posts?userId=${userId}`)
+                }).then((res) => {
+                    console.log(res.data)
+                }).then
+
+        }
+
+        newPromise((
+            resolve(reject"
+                .get("http://numbersapi.com/random?min=1&max=200")
+                .then
+            const num = res.data.split(" ")[0]
+        return axios.get(`https://koreanjson.com/posts/${num}`)
+            ))
+
+        async function myAsyncAwait() {
+            const result1 = await axios.get("http://numbersapi.com/random?min=1&max=200")
+            const num = result1.data.split('0')[0]
+            const res2 = await axios.get(`https://koreanjson.com/posts/${num}`)
+            const userId = res2.data.UserId
+            const res3 = await axios.get(`https://koreanjson.com/posts?userId=${userId}`)
+            console.log(res.data)
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="myCallback()">콜백 연습</button>
+    <button onclick="myPromise()">프로미스 연습</button>
+    <button onclick="myAsyncAwait()">async await 연습</button>
+</body>
+
+</html>

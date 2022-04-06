@@ -1,6 +1,7 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ProductSaleslocation } from '../productsSaleslocation/entities/productSaleslocation.entity';
 import { Product } from './entities/product.entity';
 
 interface IdDelete {
@@ -12,25 +13,47 @@ export class ProductService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+
+    // ProductSaleslocation 추가
+    @InjectRepository(ProductSaleslocation)
+    private readonly productSaleslocationRepository: Repository<ProductSaleslocation>,
   ) {}
 
   async findAll() {
-    return await this.productRepository.find();
+    const products = await this.productRepository.find({
+      relations: ['productSaleslocation'],
+    });
+    return products;
   }
 
   async findOne({ productId }) {
-    return await this.productRepository.findOne({ where: { id: productId } });
+    const product = await this.productRepository.findOne({
+      where: { id: productId },
+      relations: ['productSaleslocation'],
+    });
+    return product;
   }
 
   async create({ createProductInput }) {
     // 카테고리를 데이터베이스에 저장
-    const result = await this.productRepository.save({
-      //   name: createProductInput.name,
-      //   price: createProductInput.price,
-      //   description: createProductInput.description,
-      ...createProductInput,
+    // const result = await this.productRepository.save({
+    //   //   name: createProductInput.name,
+    //   //   price: createProductInput.price,
+    //   //   description: createProductInput.description,
+    //   ...createProductInput,
+    // });
+    // return result;
+
+    // 다른 테이블도 연결하여 등록하기
+    const { productSaleslocation, ...product } = createProductInput;
+    const result1 = await this.productSaleslocationRepository.save({
+      ...productSaleslocation,
     });
-    return result;
+    const result2 = await this.productRepository.save({
+      ...product,
+      productSaleslocation: result1,
+    });
+    return result2;
   }
 
   async update({ productId, updateProductInput }) {
