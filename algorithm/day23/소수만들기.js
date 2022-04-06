@@ -17,13 +17,12 @@ function solution(nums) {
 			}
 		}
 	}
-	return (
-		sum
-			.map((ele) => {
-				for (let i = 2; i < Math.sqrt(ele); i++) {
-					ele % i === 0;
-				}
-			})
-			.filter((e) => false).length - 1
-	);
+	return sum.filter((ele) => {
+		for (let i = 2; i <= ele / 2; i++) {
+			if (ele % i === 0) {
+				return false;
+			}
+		}
+		return true;
+	}).length;
 }
