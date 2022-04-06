@@ -24,10 +24,10 @@
 
 function solution(N, stages) {
 	let answer = [];
-	let fail = {};
 
-	stages.map((e, i, a) => {
-		fail;
+	temp = {};
+	stages.forEach((e, i, a) => {
+		temp[i] = e;
 	});
 
 	return answer;
