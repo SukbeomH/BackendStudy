@@ -1,6 +1,7 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ProductCategory } from '../productsCategory/entities/productCategory.entity';
 import { ProductSaleslocation } from '../productsSaleslocation/entities/productSaleslocation.entity';
 import { Product } from './entities/product.entity';
 
@@ -17,11 +18,14 @@ export class ProductService {
     // ProductSaleslocation 추가
     @InjectRepository(ProductSaleslocation)
     private readonly productSaleslocationRepository: Repository<ProductSaleslocation>,
+
+    @InjectRepository(ProductCategory)
+    private readonly productCategoryRepository: Repository<ProductCategory>,
   ) {}
 
   async findAll() {
     const products = await this.productRepository.find({
-      relations: ['productSaleslocation'],
+      relations: ['productSaleslocation', 'productCategory'],
     });
     return products;
   }
@@ -29,7 +33,7 @@ export class ProductService {
   async findOne({ productId }) {
     const product = await this.productRepository.findOne({
       where: { id: productId },
-      relations: ['productSaleslocation'],
+      relations: ['productSaleslocation', 'productCategory'],
     });
     return product;
   }
@@ -45,15 +49,20 @@ export class ProductService {
     // return result;
 
     // 다른 테이블도 연결하여 등록하기
-    const { productSaleslocation, ...product } = createProductInput;
+    const { productSaleslocation, productCategoryId, ...product } =
+      createProductInput;
     const result1 = await this.productSaleslocationRepository.save({
       ...productSaleslocation,
     });
-    const result2 = await this.productRepository.save({
+    const result2 = await this.productCategoryRepository.findOne({
+      id: productCategoryId,
+    });
+    const result3 = await this.productRepository.save({
       ...product,
       productSaleslocation: result1,
+      productCategory: result2,
     });
-    return result2;
+    return result3;
   }
 
   async update({ productId, updateProductInput }) {
