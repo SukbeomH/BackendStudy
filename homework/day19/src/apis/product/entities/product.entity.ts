@@ -38,9 +38,7 @@ export class Product {
     user: User;
 
     @JoinTable()
-    @ManyToMany(() => Purchase, (purchase) => purchase.products, {
-        nullable: true,
-    })
+    @ManyToMany(() => Purchase, (purchase) => purchase.products)
     @Field(() => [Purchase])
     purchase: Purchase[];
 }

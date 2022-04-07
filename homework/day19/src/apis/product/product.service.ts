@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ProductData } from '../productData/entities/productData.entity';
+import { User } from '../user/entities/user.entity';
 import { Product } from './entities/product.entity';
 
 @Injectable()
@@ -10,18 +10,21 @@ export class ProductService {
         @InjectRepository(Product)
         private readonly productRepository: Repository<Product>,
 
-        @InjectRepository(ProductData)
-        private readonly productDataRepository: Repository<ProductData>,
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>,
     ) {}
 
     async findAll() {
-        const result = await this.productRepository.find({});
+        const result = await this.productRepository.find({
+            relations: ['user'],
+        });
         return result;
     }
 
     async findAllWithDelete() {
         const result = await this.productRepository.find({
             withDeleted: true,
+            relations: ['user'],
         });
         return result;
     }
@@ -29,18 +32,19 @@ export class ProductService {
     async findOne({ productId }) {
         const result = await this.productRepository.findOne({
             where: { id: productId },
+            relations: ['user'],
         });
         return result;
     }
 
     async create({ createProductInput }) {
-        const { productData, ...product } = createProductInput;
-        const result1 = await this.productDataRepository.save({
-            ...productData,
+        const { userId, ...temp } = createProductInput;
+        const result1 = await this.userRepository.save({
+            ...userId,
         });
         const result2 = await this.productRepository.save({
-            ...product,
-            productData: result1,
+            ...temp,
+            user: result1,
         });
         return result2;
     }
@@ -48,6 +52,7 @@ export class ProductService {
     async update({ productId, updateProductInput }) {
         const product = await this.productRepository.findOne({
             where: { id: productId },
+            relations: ['user'],
         });
         const newProduct = { ...product, ...updateProductInput };
         const result = await this.productRepository.save(newProduct);
@@ -63,7 +68,10 @@ export class ProductService {
 
     async restore({ productId }) {
         await this.productRepository.restore({ id: productId });
-        const result = await this.productRepository.findOne({ id: productId });
+        const result = await this.productRepository.findOne({
+            where: { id: productId },
+            relations: ['user'],
+        });
         return result;
     }
 }

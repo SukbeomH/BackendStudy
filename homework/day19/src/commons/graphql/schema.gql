@@ -78,12 +78,14 @@ input CreateProductInput {
   name: String
   price: Int
   description: String
+  userId: String!
 }
 
 input UpdateProductInput {
   name: String
   price: Int
   description: String
+  userId: String
 }
 
 input CreateBoardInput {
