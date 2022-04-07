@@ -1,0 +1,97 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  email: String
+  password: String
+  kakao: String
+  auth: Int
+  date: String
+  admin: Boolean
+}
+
+type Category {
+  name: String!
+}
+
+type Board {
+  id: String!
+  title: String
+  content: String
+  date: String
+  user: User!
+  category: Category!
+}
+
+type Purchase {
+  id: String!
+  price: Int!
+  count: Int!
+  date: String!
+  products: [Product!]!
+}
+
+type Product {
+  id: String!
+  name: String
+  price: Int
+  description: String
+  user: User!
+  purchase: [Purchase!]!
+}
+
+type Deal {
+  id: String!
+  name: String!
+  price: Int!
+  site: String!
+  shop: String!
+  isEnd: Boolean!
+  time: String!
+  image: String!
+  category: Category!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProductsWithDelete: [Product!]!
+  fetchProduct(productId: String!): Product!
+  fetchBoards: [Board!]!
+  fetchBoardsWithDelete: [Board!]!
+  fetchBoard(boardId: String!): Board!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Product!
+  restoreDeletedProduct(productId: String!): Product!
+  createBoard(createBoardInput: CreateBoardInput!): Board!
+  updateBoard(boardId: String!, updateBoardInput: UpdateBoardInput!): Board!
+  deleteBoard(boardId: String!): Board!
+  restoreDeletedBoard(boardId: String!): Board!
+}
+
+input CreateProductInput {
+  name: String
+  price: Int
+  description: String
+}
+
+input UpdateProductInput {
+  name: String
+  price: Int
+  description: String
+}
+
+input CreateBoardInput {
+  title: String
+  content: String
+}
+
+input UpdateBoardInput {
+  title: String
+  content: String
+}
