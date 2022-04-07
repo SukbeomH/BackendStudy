@@ -23,12 +23,37 @@
 // 스테이지에 도달한 유저가 없는 경우 해당 스테이지의 실패율은 0 으로 정의한다.
 
 function solution(N, stages) {
+	let people = stages.length;
 	let answer = [];
 
-	temp = {};
-	stages.forEach((e, i, a) => {
-		temp[i] = e;
-	});
+	for (let i = 1; i <= N + 1; i++) {
+		const temp = stages.filter((e) => e === i).length;
+		answer.push([i, temp / people]);
+		people -= temp;
+	}
+	answer.pop();
+	answer.sort(([, a], [, b]) => b - a);
+	return answer.map((e) => e[0]);
+}
 
-	return answer;
+// 실패
+function solution(N, stages) {
+	let answer = [];
+	let temp = {};
+	let clear = [];
+
+	for (let j = 1; j <= N + 1; j++) {
+		for (let i = 0; i < stages.length; i++) {
+			if (stages[i] <= j) {
+				clear[j]++;
+			}
+		}
+		temp[j] = clear / (stages.length - clear[j]);
+	}
+
+	for (const [key, value] of Object.entries(temp)) {
+		answer.push([key, value]);
+	}
+
+	console.log(answer);
 }
