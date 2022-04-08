@@ -26,10 +26,9 @@ function solutionF(n) {
 }
 
 function solution(n) {
-	let num1 = 0;
-	let num2 = 0;
-	let num3 = 0;
-	for (let i = 0; i <= n; i++) {}
+	let num = 0;
+	
+    
 }
 
 // n 번째 피보나치 수
