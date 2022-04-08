@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  email: String!
+  kakao: String!
+  auth: Int!
+  admin: Boolean!
+}
+
+type Category {
+  name: String!
+}
+
+type Board {
+  id: String!
+  title: String
+  content: String
+  date: String
+  user: User!
+  category: Category!
+}
+
+type Product {
+  id: String!
+  name: String
+  price: Int
+  description: String
+  user: User!
+  purchase: [Purchase!]!
+}
+
+type Purchase {
+  id: String!
+  price: Int!
+  count: Int!
+  able: Boolean!
+  products: [Product!]!
+  user: User!
+}
+
+type Deal {
+  id: String!
+  name: String!
+  price: Int!
+  site: String!
+  shop: String!
+  isEnd: Boolean!
+  time: String!
+  image: String!
+  category: Category!
+}
+
+type Query {
+  fetchBoards: [Board!]!
+  fetchBoardsWithDelete: [Board!]!
+  fetchBoard(boardId: String!): Board!
+  fetchProducts: [Product!]!
+  fetchProductsWithDelete: [Product!]!
+  fetchProduct(productId: String!): Product!
+}
+
+type Mutation {
+  createBoard(createBoardInput: CreateBoardInput!): Board!
+  updateBoard(boardId: String!, updateBoardInput: UpdateBoardInput!): Board!
+  deleteBoard(boardId: String!): Board!
+  restoreDeletedBoard(boardId: String!): Board!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Product!
+  restoreDeletedProduct(productId: String!): Product!
+  createUser(email: String!, password: String!, kakao: String!, auth: Float!): User!
+}
+
+input CreateBoardInput {
+  title: String
+  content: String
+}
+
+input UpdateBoardInput {
+  title: String
+  content: String
+}
+
+input CreateProductInput {
+  name: String
+  price: Int
+  description: String
+  userId: String!
+  purchases: [String!]!
+}
+
+input UpdateProductInput {
+  name: String
+  price: Int
+  description: String
+  userId: String
+  purchases: [String!]
+}
