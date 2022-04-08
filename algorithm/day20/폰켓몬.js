@@ -37,8 +37,6 @@
 // 선택할 수 있는 폰켓몬 종류 개수의 최댓값 하나만 return 하면 됩니다.
 
 function solution(nums) {
-	let answer = 1;
-	let temp = 1;
 	const num = new Set(nums);
 
 	if (num.size <= nums.length / 2) {
