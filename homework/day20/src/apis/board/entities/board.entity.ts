@@ -22,11 +22,11 @@ export class Board {
     @Field(() => String, { nullable: true })
     date: string;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @Field(() => User)
     user: User;
 
-    @ManyToOne(() => Category)
+    @ManyToOne(() => Category, { onDelete: 'CASCADE' })
     @Field(() => Category)
     category: Category;
 }

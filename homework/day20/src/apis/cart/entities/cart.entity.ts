@@ -12,7 +12,7 @@ import { User } from 'src/apis/user/entities/user.entity';
 
 @Entity()
 @ObjectType()
-export class Purchase {
+export class Cart {
     @PrimaryGeneratedColumn('uuid')
     @Field(() => String)
     id: string;
@@ -32,11 +32,11 @@ export class Purchase {
     @CreateDateColumn()
     createAt: Date;
 
-    @ManyToMany(() => Product, (product) => product.purchase)
+    @ManyToMany(() => Product, (product) => product.cart)
     @Field(() => [Product])
     products: Product[];
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @Field(() => User)
     user: User;
 }

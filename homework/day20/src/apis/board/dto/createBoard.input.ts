@@ -7,4 +7,10 @@ export class CreateBoardInput {
 
     @Field(() => String, { nullable: true })
     content: string;
+
+    @Field(() => String)
+    userId: string;
+
+    @Field(() => String)
+    categoryName: string;
 }

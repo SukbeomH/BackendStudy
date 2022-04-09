@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Board } from 'src/apis/board/entities/board.entity';
+import { User } from 'src/apis/user/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -13,7 +14,11 @@ export class Comment {
     @Field(() => String)
     content: string;
 
-    @ManyToOne(() => Board)
+    @ManyToOne(() => Board, { onDelete: 'CASCADE' })
     @Field(() => Board)
     board: Board;
+
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
+    @Field(() => User)
+    user: User;
 }

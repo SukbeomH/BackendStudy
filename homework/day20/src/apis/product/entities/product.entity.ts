@@ -8,7 +8,7 @@ import {
     DeleteDateColumn,
 } from 'typeorm';
 import { User } from 'src/apis/user/entities/user.entity';
-import { Purchase } from 'src/apis/purchase/entities/purchase.entity';
+import { Cart } from 'src/apis/cart/entities/cart.entity';
 import { Int, ObjectType, Field } from '@nestjs/graphql';
 
 @Entity()
@@ -33,12 +33,12 @@ export class Product {
     @DeleteDateColumn()
     deletedAt?: Date;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @Field(() => User)
     user: User;
 
     @JoinTable()
-    @ManyToMany(() => Purchase, (purchase) => purchase.products)
-    @Field(() => [Purchase])
-    purchase: Purchase[];
+    @ManyToMany(() => Cart, (cart) => cart.products)
+    @Field(() => [Cart])
+    cart: Cart[];
 }

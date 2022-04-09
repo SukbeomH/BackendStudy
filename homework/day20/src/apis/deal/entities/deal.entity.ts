@@ -37,7 +37,7 @@ export class Deal {
     @Field(() => String)
     image: string;
 
-    @ManyToOne(() => Category)
+    @ManyToOne(() => Category, { onDelete: 'CASCADE' })
     @Field(() => Category)
     category: Category;
 }

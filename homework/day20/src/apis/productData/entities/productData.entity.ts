@@ -13,7 +13,7 @@ export class ProductData {
     @Field(() => String, { nullable: true })
     image: string;
 
-    @ManyToOne(() => Product)
+    @ManyToOne(() => Product, { onDelete: 'CASCADE' })
     @Field(() => Product)
     product: Product;
 }

@@ -14,11 +14,11 @@ export class DealComment {
     @Field(() => String)
     content: string;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @Field(() => User)
     user: User;
 
-    @ManyToOne(() => Deal)
+    @ManyToOne(() => Deal, { onDelete: 'CASCADE' })
     @Field(() => Deal)
     deal: Deal;
 }
