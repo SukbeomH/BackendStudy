@@ -66,7 +66,6 @@ export class ProductService {
             throw new ConflictException('수정하려는 상품이 존재하지 않습니다');
         const product = await this.productRepository.findOne({
             where: { id: productId },
-            relations: ['cart', 'productData', 'user'],
         });
         const newProduct = { ...product, ...updateProductInput };
         const result = await this.productRepository.save(newProduct);
@@ -90,7 +89,6 @@ export class ProductService {
         await this.productRepository.restore({ id: productId });
         const result = await this.productRepository.findOne({
             where: { id: productId },
-            relations: ['cart', 'productData', 'user'],
         });
         return result;
     }

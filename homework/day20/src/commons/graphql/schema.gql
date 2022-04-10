@@ -23,21 +23,34 @@ type Board {
   category: Category!
 }
 
+type BoardImage {
+  id: String!
+  image: String!
+  board: Board!
+}
+
+type Cart {
+  id: String!
+  price: Int!
+  count: Int!
+  able: Boolean!
+  products: [Product!]!
+  user: User!
+}
+
 type Product {
   id: String!
   name: String
   price: Int
   description: String
   user: User!
-  purchase: [Purchase!]!
+  carts: [Cart!]!
 }
 
-type Purchase {
+type Comment {
   id: String!
-  price: Int!
-  count: Int!
-  able: Boolean!
-  products: [Product!]!
+  content: String!
+  board: Board!
   user: User!
 }
 
@@ -53,13 +66,29 @@ type Deal {
   category: Category!
 }
 
+type DealComment {
+  id: String!
+  content: String!
+  user: User!
+  deal: Deal!
+}
+
 type Query {
   fetchBoards: [Board!]!
   fetchBoardsWithDelete: [Board!]!
   fetchBoard(boardId: String!): Board!
+  fetchBoardImages: [BoardImage!]!
+  fetchBoardImage(boardImageId: String!): BoardImage!
   fetchProducts: [Product!]!
-  fetchProductsWithDelete: [Product!]!
   fetchProduct(productId: String!): Product!
+  fetchCategories: [User!]!
+  fetchCategoriesWithDelete: [Category!]!
+  fetchCategory(email: String!): User!
+  fetchComments: [Comment!]!
+  fetchComment(commentId: String!): Comment!
+  fetchDealComments: [DealComment!]!
+  fetchDealComment(dealCommentId: String!): DealComment!
+  fetchProductsWithDelete: [Product!]!
 }
 
 type Mutation {
@@ -67,21 +96,57 @@ type Mutation {
   updateBoard(boardId: String!, updateBoardInput: UpdateBoardInput!): Board!
   deleteBoard(boardId: String!): Board!
   restoreDeletedBoard(boardId: String!): Board!
+  createBoardImage(createBoardImageInput: CreateBoardImageInput!): BoardImage!
+  deleteBoardImage(boardImageId: String!): BoardImage!
+  createCart(createCartInput: CreateCartInput!): Cart!
+  createCategory(name: String!): Category!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  deleteComment(CommentId: String!): Comment!
+  createDealComment(createDealCommentInput: CreateDealCommentInput!): DealComment!
+  deleteDealComment(DealCommentId: String!): DealComment!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Product!
   restoreDeletedProduct(productId: String!): Product!
   createUser(email: String!, password: String!, kakao: String!, auth: Float!): User!
+  deleteUser(email: String!): User!
 }
 
 input CreateBoardInput {
   title: String
   content: String
+  userId: String!
+  categoryName: String!
 }
 
 input UpdateBoardInput {
   title: String
   content: String
+  userId: String
+  categoryName: String
+}
+
+input CreateBoardImageInput {
+  image: String!
+  boardId: String!
+}
+
+input CreateCartInput {
+  price: Int!
+  count: Int!
+  able: Boolean = true
+}
+
+input CreateCommentInput {
+  content: String!
+  boardId: String!
+  userId: String!
+}
+
+input CreateDealCommentInput {
+  content: String!
+  dealId: String!
+  userId: String!
 }
 
 input CreateProductInput {
@@ -89,7 +154,12 @@ input CreateProductInput {
   price: Int
   description: String
   userId: String!
-  purchases: [String!]!
+  cart: [String!]!
+  productData: CreateProductDataInput!
+}
+
+input CreateProductDataInput {
+  image: String
 }
 
 input UpdateProductInput {
@@ -97,5 +167,6 @@ input UpdateProductInput {
   price: Int
   description: String
   userId: String
-  purchases: [String!]
+  cart: [String!]
+  productData: CreateProductDataInput
 }

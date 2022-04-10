@@ -40,5 +40,5 @@ export class Product {
     @JoinTable()
     @ManyToMany(() => Cart, (cart) => cart.products)
     @Field(() => [Cart])
-    cart: Cart[];
+    carts: Cart[];
 }

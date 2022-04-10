@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardModule } from './apis/board/board.module';
 import { BoardImageModule } from './apis/boardImage/boardImage.module';
+import { CartModule } from './apis/cart/cart.module';
 import { CategoryModule } from './apis/category/category.module';
 import { CommentModule } from './apis/comment/comment.module';
 import { DealCommentModule } from './apis/dealComment/dealComment.module';
@@ -16,6 +17,7 @@ import { UserModule } from './apis/user/user.module';
     imports: [
         BoardModule,
         BoardImageModule,
+        CartModule,
         CategoryModule,
         CommentModule,
         DealCommentModule,
@@ -27,13 +29,13 @@ import { UserModule } from './apis/user/user.module';
         }),
         TypeOrmModule.forRoot({
             type: 'mysql',
-            // host: 'my-database',
-            host: 'localhost',
+            host: 'my-database',
+            // host: 'localhost',
             port: 3306,
             username: 'root',
             password: 'root',
-            // database: 'myDocker',
-            database: 'localhost',
+            database: 'myDocker',
+            // database: 'localhost',do
             entities: [__dirname + '/apis/**/*.entity.*'],
             synchronize: true,
             logging: true,

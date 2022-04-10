@@ -25,7 +25,7 @@ export class DealCommentResolver {
         return this.dealCommentService.create({ createDealCommentInput });
     }
 
-    @Mutation(() => Comment)
+    @Mutation(() => DealComment)
     async deleteDealComment(@Args('DealCommentId') dealCommentId: string) {
         return this.dealCommentService.delete({ dealCommentId });
     }

@@ -8,7 +8,7 @@ import { ProductResolver } from './product.resolver';
 import { ProductService } from './product.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Cart, Product, User])],
-    providers: [ProductResolver, ProductService, ProductData],
+    imports: [TypeOrmModule.forFeature([Cart, Product, User, ProductData])],
+    providers: [ProductResolver, ProductService],
 })
 export class ProductModule {}
