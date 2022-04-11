@@ -20,15 +20,26 @@ function solutionF(n) {
 		if (m <= 2) {
 			return 1;
 		}
-		return (fibonacci(m - 1) % 1234567) + (fibonacci(m - 2) % 1234567);
+		return (
+			(fibonacci(m - 1) % 1234567) +
+			(fibonacci(m - 2) % 1234567)
+		);
 	}
 	return fibonacci(n);
 }
 
 function solution(n) {
 	let num = 0;
-	
-    
+	let fibo1 = 0;
+	let fibo2 = 1;
+	for (let i = 2; i <= n; i++) {
+		num = ((fibo1 % 1234567) + (fibo2 % 1234567)) % 1234567;
+		fibo1 = fibo2;
+		fibo2 = num;
+	}
+	if (n === 2) {
+		return 1;
+	} else return num;
 }
 
 // n 번째 피보나치 수
