@@ -5,6 +5,7 @@
 type User {
   id: String!
   email: String!
+  password: String!
   kakao: String!
   auth: Int!
   admin: Boolean!
@@ -82,17 +83,20 @@ type Query {
   fetchBoardImage(boardImageId: String!): BoardImage!
   fetchProducts: [Product!]!
   fetchProduct(productId: String!): Product!
-  fetchCategories: [User!]!
+  fetchCategories: [Category!]!
   fetchCategoriesWithDelete: [Category!]!
-  fetchCategory(email: String!): User!
+  fetchCategory(name: String!): Category!
   fetchComments: [Comment!]!
   fetchComment(commentId: String!): Comment!
   fetchDealComments: [DealComment!]!
   fetchDealComment(dealCommentId: String!): DealComment!
   fetchProductsWithDelete: [Product!]!
+  fetchUsers: [User!]!
+  fetchUser: User!
 }
 
 type Mutation {
+  login(email: String!, password: String!): String!
   createBoard(createBoardInput: CreateBoardInput!): Board!
   updateBoard(boardId: String!, updateBoardInput: UpdateBoardInput!): Board!
   deleteBoard(boardId: String!): Board!
@@ -110,7 +114,8 @@ type Mutation {
   deleteProduct(productId: String!): Product!
   restoreDeletedProduct(productId: String!): Product!
   createUser(email: String!, password: String!, kakao: String!, auth: Float!): User!
-  deleteUser(email: String!): User!
+  updateUserPassword(newPassword: String!): User!
+  deleteUser: Boolean!
 }
 
 input CreateBoardInput {

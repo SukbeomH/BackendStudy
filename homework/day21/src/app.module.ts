@@ -2,6 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './apis/auth/auth.module';
 import { BoardModule } from './apis/board/board.module';
 import { BoardImageModule } from './apis/boardImage/boardImage.module';
 import { CartModule } from './apis/cart/cart.module';
@@ -15,6 +16,7 @@ import { UserModule } from './apis/user/user.module';
 
 @Module({
     imports: [
+        AuthModule,
         BoardModule,
         BoardImageModule,
         CartModule,
@@ -29,13 +31,13 @@ import { UserModule } from './apis/user/user.module';
         }),
         TypeOrmModule.forRoot({
             type: 'mysql',
-            // host: 'my-database',
-            host: 'localhost',
+            host: 'my-database',
+            // host: 'localhost',
             port: 3306,
             username: 'root',
             password: 'root',
-            // database: 'myDocker',
-            database: 'localhost',
+            database: 'myDocker',
+            // database: 'localhost',
             entities: [__dirname + '/apis/**/*.entity.*'],
             synchronize: true,
             logging: true,

@@ -14,18 +14,14 @@ export class UserService {
         return await this.userRepository.find();
     }
 
-    async findOne({ email }) {
-        const category = await this.userRepository.findOne({
-            email,
-        });
-        if (!category)
+    async findOne({ email: email }) {
+        const UserMail = await this.userRepository.findOne({ email });
+        if (!UserMail)
             throw new ConflictException(
                 '검색하려는 이메일이 존재하지 않습니다',
             );
 
-        return await this.userRepository.findOne({
-            where: { email },
-        });
+        return await this.userRepository.findOne({ where: { email } });
     }
 
     async create({ email, hashedPassword: password, kakao, auth }) {
@@ -36,13 +32,18 @@ export class UserService {
         return await this.userRepository.save({ email, password, kakao, auth });
     }
 
+    async updatePassword({ email: email, newHashedPassword }) {
+        const user = await this.userRepository.findOne({ where: { email } });
+        user.password = newHashedPassword;
+
+        return await this.userRepository.save(user);
+    }
+
     async delete({ email }) {
         const userMail = await this.userRepository.findOne({ email });
         if (!userMail)
             throw new ConflictException('삭제하려는 유저가 존재하지 않습니다');
-        const result = await this.userRepository.delete({
-            email,
-        });
+        const result = await this.userRepository.delete({ email });
         return result.affected ? true : false;
     }
 }
