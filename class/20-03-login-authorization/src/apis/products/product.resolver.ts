@@ -37,6 +37,7 @@ export class ProductResolver {
 
   @Mutation(() => Boolean)
   deleteProduct(@Args('productId') productId: string) {
-    return this.productService.delete({ productId });
+    this.productService.delete({ productId });
+    return '계정이 삭제되었습니다';
   }
 }
