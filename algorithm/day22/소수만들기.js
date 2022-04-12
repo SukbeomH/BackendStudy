@@ -26,3 +26,39 @@ function solution(nums) {
 		return true;
 	}).length;
 }
+
+//
+function methods(nums) {
+	let answer = 0;
+	let idx = 0;
+
+	// 첫번째 수 = num1
+	nums.forEach((num1, i) => {
+		idx = i + 1;
+		// 두번째 수 = num2
+		nums.slice(idx).forEach((num2) => {
+			idx++;
+			// 세번째 수 = num3
+			nums.slice(idx).forEach((num3) => {
+				const sum = num1 + num2 + num3;
+
+				let count = 0;
+				//짝수는 판별할 필요 없다.
+				if (sum % 2 === 1) {
+					for (let j = 0; j <= sum; j++) {
+						if (sum % j === 0) {
+							count++;
+						}
+						if (count > 2) {
+							break;
+						}
+						if (count === 2) {
+							answer++;
+						}
+					}
+				}
+			});
+		});
+	});
+	return answer;
+}

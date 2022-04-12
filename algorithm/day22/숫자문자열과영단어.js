@@ -44,3 +44,40 @@ function solution(s) {
 	}
 	return Number(temp);
 }
+
+function RegularExpression1(s) {
+	s = replace(/zero/g, 0);
+	s = replace(/one/g, 1);
+	s = replace(/two/g, 2);
+	s = replace(/three/g, 3);
+	s = replace(/four/g, 4);
+	s = replace(/five/g, 5);
+	s = replace(/six/g, 6);
+	s = replace(/seven/g, 7);
+	s = replace(/eight/g, 8);
+	s = replace(/nine/g, 9);
+
+	return Number(s);
+}
+
+function RegularExpression2(s) {
+	// 정규표현식에서의 변수 할당법
+	const str = [
+		"zero",
+		"one",
+		"two",
+		"three",
+		"four",
+		"five",
+		"six",
+		"seven",
+		"eight",
+		"nine",
+	];
+
+	for (let i = 0; i < str.length; i++) {
+		const regExp = new RegExp(str[i], "g");
+		s = replace(regExp, i);
+	}
+	return Number(s);
+}
