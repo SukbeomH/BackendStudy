@@ -31,7 +31,6 @@
                     if (rsp.success) {
                         // 결제 성공시
                         console.log(rsp);
-
                         const data = await axios.post(
                             "http://localhost:3000/graphql",
                             {
@@ -39,7 +38,6 @@
                                     mutation {
                                         createPointTransaction(
                                             impUid: "${rsp.imp_uid}",
-                                            id: "${rsp.merchant_uid}"
                                             amount: ${rsp.paid_amount}) {
                                         id
                                         }
@@ -49,7 +47,7 @@
                             {
                                 headers: {
                                     authorization:
-                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJzdWIiOiJhNjY2Njc1YS02MjQ3LTQ2NjktYTQyYy1jNjk4MDQwNWIwODUiLCJpYXQiOjE2NDQwNDgxNTksImV4cCI6MTY0NDA1MTc1OX0.zFC8DbpzQQbCvgGqCfQ05aknU-IkNEIAKyM4uflp9Mc",
+                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJiYkBhYWEuY29tIiwic3ViIjoiYzRjYmU2NTQtNDA0OC00YWNhLTkxNWYtY2Q0YjAzNzZlODM5IiwiaWF0IjoxNjQ5OTQwNDg3LCJleHAiOjE2NDk5NTg0ODd9.lS1k48UHR_LjvPWOP26G527YbuorAP_Iy_7IER2jH20",
                                 },
                             }
                         );

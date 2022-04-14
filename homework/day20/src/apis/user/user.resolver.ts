@@ -20,10 +20,10 @@ export class UserResolver {
     createUser(
         @Args('email') email: string,
         @Args('password') password: string,
-        @Args('kakao') kakao: string,
+        @Args('snsId') snsId: string,
         @Args('auth') auth: number,
     ) {
-        return this.userService.create({ email, password, kakao, auth });
+        return this.userService.create({ email, password, snsId, auth });
     }
 
     @Mutation(() => User)

@@ -39,6 +39,7 @@ export class AuthService {
                 password: req.user.password,
                 snsId: req.user.snsId,
                 provider: req.user.provider,
+                point: req.user.point,
                 auth: req.user.auth,
             });
             res.redirect(

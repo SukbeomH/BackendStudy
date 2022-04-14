@@ -26,9 +26,18 @@ export class UserResolver {
         @Args('email') email: string,
         @Args('password') password: string,
         @Args('snsId') snsId: string,
+        @Args('provider') provider: string,
+        @Args('point') point: number,
         @Args('auth') auth: number,
     ) {
-        return this.userService.create({ email, password, snsId, auth });
+        return this.userService.create({
+            email,
+            password,
+            snsId,
+            provider,
+            point,
+            auth,
+        });
     }
 
     @UseGuards(GqlAuthEmailGuard)

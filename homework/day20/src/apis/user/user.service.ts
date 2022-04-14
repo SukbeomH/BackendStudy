@@ -28,12 +28,12 @@ export class UserService {
         });
     }
 
-    async create({ email, password, kakao, auth }) {
+    async create({ email, password, snsId, auth }) {
         // 기존 데이터베이스에 이미 메일주소가 있는지 찾는다
         const userMail = await this.userRepository.findOne({ email });
         // 이미 등록된 메일이라면 에러를 뱉도록 한다
         if (userMail) throw new ConflictException('이미 등록된 이메일입니다');
-        return await this.userRepository.save({ email, password, kakao, auth });
+        return await this.userRepository.save({ email, password, snsId, auth });
     }
 
     async delete({ email }) {

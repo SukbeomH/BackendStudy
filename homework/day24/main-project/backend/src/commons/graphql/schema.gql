@@ -6,9 +6,11 @@ type User {
   id: String!
   email: String!
   password: String!
-  kakao: String!
+  snsId: String!
+  provider: String!
+  point: Int!
   auth: Int!
-  admin: Boolean
+  admin: Boolean!
 }
 
 type Category {
@@ -20,7 +22,6 @@ type Board {
   id: String!
   title: String
   content: String
-  date: String
   user: User!
   category: Category!
 }
@@ -75,6 +76,25 @@ type DealComment {
   deal: Deal!
 }
 
+type PointTransaction {
+  id: String!
+  impUid: String!
+  amount: Int!
+  status: POINT_TRANSACTION_STATUS_ENUM!
+  user: User!
+  purchasedAt: DateTime!
+}
+
+enum POINT_TRANSACTION_STATUS_ENUM {
+  PAYMENT
+  CANCEL
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   fetchBoards: [Board!]!
   fetchBoardsWithDelete: [Board!]!
@@ -110,11 +130,12 @@ type Mutation {
   deleteComment(CommentId: String!): Comment!
   createDealComment(createDealCommentInput: CreateDealCommentInput!): DealComment!
   deleteDealComment(DealCommentId: String!): DealComment!
+  createPointTransaction(impUid: String!, amount: Float!): PointTransaction!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Product!
   restoreDeletedProduct(productId: String!): Product!
-  createUser(email: String!, password: String!, kakao: String!, auth: Float!): User!
+  createUser(email: String!, password: String!, snsId: String!, provider: String!, point: Float!, auth: Float!): User!
   updateUserPassword(newPassword: String!): User!
   deleteUser: Boolean!
 }

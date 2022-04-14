@@ -29,9 +29,9 @@ export class PointTransaction {
     @Field(() => String)
     impUid: string;
 
-    @Column()
-    @Field(() => String)
-    merchantUid: string;
+    // @Column()
+    // @Field(() => String)
+    // merchantUid: string;
 
     @Column()
     @Field(() => Int)
