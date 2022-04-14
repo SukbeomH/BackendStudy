@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne,
+    CreateDateColumn,
+    UpdateDateColumn, } from 'typeorm';
 import { User } from 'src/apis/user/entities/user.entity';
 import { Category } from 'src/apis/category/entities/category.entity';
 import { ObjectType, Field } from '@nestjs/graphql';
@@ -18,9 +20,11 @@ export class Board {
     @Field(() => String, { nullable: true })
     content: string;
 
-    @Column({ nullable: true })
-    @Field(() => String, { nullable: true })
-    date: string;
+    @CreateDateColumn()
+    createAt: Date;
+
+    @UpdateDateColumn()
+    updateAt: Date;
 
     @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @Field(() => User)

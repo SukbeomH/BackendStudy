@@ -15,7 +15,7 @@ export class AuthService {
             { secret: 'projectRefreshKey', expiresIn: '2w' },
         );
         //개발환경
-        res.setHeader('Set-Cookie', `refreshToken=${refreshToken}`);
+        res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
         // 배포환경
         // res.setHeader('Access-Control-Allow-Origin', 'https://myfrontsite.com')
         // res.setHeader(
@@ -38,6 +38,7 @@ export class AuthService {
                 email: req.user.email,
                 password: req.user.password,
                 kakao: req.user.kakao,
+                provider: req.user.provider,
                 auth: req.user.auth,
             });
             res.redirect(

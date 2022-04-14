@@ -2,6 +2,7 @@ import { Int, ObjectType, Field } from '@nestjs/graphql';
 import {
     Column,
     CreateDateColumn,
+    UpdateDateColumn,
     Entity,
     PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -25,14 +26,21 @@ export class User {
     @Field(() => String)
     kakao: string;
 
+    @Column({default:"self"})
+    @Field(() => String,{defaultValue: "self"})
+    provider: string;
+
     @Column()
     @Field(() => Int)
     auth: number;
 
-    @CreateDateColumn({ nullable: true })
+    @CreateDateColumn()
     createAt: Date;
 
-    @Column({ default: 0, nullable: true })
-    @Field(() => Boolean, { defaultValue: 0, nullable: true })
+    @UpdateDateColumn()
+    updateAt: Date;
+
+    @Column({ default: 0 })
+    @Field(() => Boolean, { defaultValue: 0 })
     admin: boolean;
 }
