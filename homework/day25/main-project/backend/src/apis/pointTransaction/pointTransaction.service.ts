@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IamportService } from '../imaport/iamport.service';
@@ -18,14 +18,23 @@ export class PointTransactionService {
         private readonly iamportService: IamportService,
     ) {}
 
-    async create({ impUid, amount, contextUser }) {
-        // 아임포트 엑세스 토큰 발급
-        const token = await this.iamportService.getToken();
+    async create({ impUid, merchantUid, amount, contextUser }) {
+        // 결제 검증
+        await this.iamportService.validateOrder({
+            impUid,
+            amount,
+        });
+        // 엑세스 토큰 새로 생성
+        const accessToken = await this.iamportService.getToken();
+        // 거래기록이 이미 존재하는지 확인
+        const order = await this.pointTransactionRepository.findOne({ impUid });
+        if (!order)
+            throw new ConflictException('이미 존재하는 결제 건입니다 🫢');
         // 거래기록 생성
         const pointTransaction = await this.pointTransactionRepository.save({
             impUid,
-            // merchantUid:,
-            impToken: token,
+            merchantUid,
+            impToken: accessToken,
             amount,
             user: contextUser,
             status: POINT_TRANSACTION_STATUS_ENUM.PAYMENT,
@@ -41,8 +50,50 @@ export class PointTransactionService {
         return pointTransaction;
     }
 
-    async refund({ impUid, cancelAmount, contextUser }) {
+    async refund({ impUid, merchantUid, cancelAmount, contextUser }) {
+        // 환불하려는 결제가 존재하는지 검증
+        const order = await this.pointTransactionRepository.findOne({
+            merchantUid,
+        });
+        if (!order)
+            throw new ConflictException('존재하지 않는 결제 건입니다 🫢');
+        // 이미 환불 되었는지 확인
+        if (order.status === 'CANCEL')
+            throw new ConflictException('이미 환불 된 결제 건입니다 🫢');
+        // 환불 가능 금액( 유저의 잔액 - 환불 된 총 금액) 계산
+        const user = await this.userRepository.findOne({
+            id: contextUser.id,
+        });
+        const amount = user.point;
+        const cancelableAmount = amount - cancelAmount;
+        // 환불 가능한 금액보다 요구가 클 경우
+        if (cancelableAmount <= 0)
+            throw new ConflictException(
+                '🤔 보유하고 있는 포인트 보다 환불 금액이 클 수 없습니다!',
+            );
         // 아임포트 엑세스 토큰 발급
-        const token = await this.iamportService.getToken();
+        const accessToken = await this.iamportService.getToken();
+        // 아임포트 측으로 환불요청 전송
+        const refundResponse = await this.iamportService.refund({
+            accessToken,
+            impUid,
+            cancelAmount,
+            cancelableAmount,
+        });
+        const pointTransaction = await this.pointTransactionRepository.save({
+            impUid,
+            merchantUid,
+            impToken: accessToken,
+            cancelAmount,
+            user: contextUser,
+            status: POINT_TRANSACTION_STATUS_ENUM.CANCEL,
+        });
+        // 유저의 포인트 업데이트 (충전한 포인트 더해주기)
+        await this.userRepository.update(
+            { id: user.id },
+            { point: user.point - cancelAmount },
+        );
+        // 최종결과를 프론트에 반환
+        return `🚩요청 결과: ${pointTransaction}, 아임포트 반환값: ${refundResponse} 🏳️`;
     }
 }

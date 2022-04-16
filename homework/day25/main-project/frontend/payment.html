@@ -7,8 +7,21 @@
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+        function orderUUID() {
+            const date = new Date()
+            const yyyy = date.getFullYear()
+            const mm = String(date.getMonth() + 1).padStart(2, "0")
+            const dd = String(date.getDate()).padStart(2, "0")
+            const h = String(date.getHours()).padStart(2, "0")
+            const m = String(date.getMinutes()).padStart(2, "0")
+            const s = String(date.getSeconds()).padStart(2, "0")
+            const r = String(Math.floor(Math.random() * 10 ** 6)).padStart(6, "0")
+            const UUID = `ORD${yyyy}${mm}${dd}-${h}${m}${s}-${r}`
+            return UUID
+        }
         function myPayment() {
             const myAmount = Number(document.getElementById("amount").value);
+            const merchantUid = orderUUID()
 
             const IMP = window.IMP; // 생략 가능
             IMP.init("imp74704194"); // Example: imp00000000
@@ -17,7 +30,7 @@
                     // param
                     pg: "html5_inicis",
                     pay_method: "card",
-                    merchant_uid: "ORD20180131-0000015", // 주문번호 - 결제위변조 여부 검증
+                    merchant_uid: merchantUid, // 주문번호 - 결제위변조 여부 검증
                     name: "point",
                     amount: myAmount,
                     buyer_email: "puppy@gmail.com",
@@ -39,6 +52,7 @@
                                     mutation {
                                         createPointTransaction(
                                             impUid: "${rsp.imp_uid}",
+                                            merchant_uid: "${rsp.merchant_uid}"
                                             amount: ${rsp.paid_amount}) { 
                                         id
                                         }
