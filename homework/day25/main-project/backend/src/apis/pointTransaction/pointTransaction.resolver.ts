@@ -16,14 +16,12 @@ export class PointTransactionResolver {
     createPointTransaction(
         @Req() req: Request,
         @Args('impUid') impUid: string,
-        @Args('merchantUid') merchantUid: string,
-        @Args('amount') amount: number,
+        @Args('requestAmount') requestAmount: number,
         @ContextUser() contextUser: IContextUser,
     ) {
         return this.pointTransactionService.create({
             impUid,
-            merchantUid,
-            amount,
+            requestAmount,
             contextUser,
         });
     }

@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        function orderUUID() {
+        function merchantUid() {
             const date = new Date()
             const yyyy = date.getFullYear()
             const mm = String(date.getMonth() + 1).padStart(2, "0")
@@ -21,7 +21,6 @@
         }
         function myPayment() {
             const myAmount = Number(document.getElementById("amount").value);
-            const merchantUid = orderUUID()
 
             const IMP = window.IMP; // 생략 가능
             IMP.init("imp74704194"); // Example: imp00000000
@@ -30,7 +29,7 @@
                     // param
                     pg: "html5_inicis",
                     pay_method: "card",
-                    merchant_uid: merchantUid, // 주문번호 - 결제위변조 여부 검증
+                    // merchant_uid: merchantUid, // 주문번호 - 결제위변조 여부 검증
                     name: "point",
                     amount: myAmount,
                     buyer_email: "puppy@gmail.com",
@@ -52,7 +51,6 @@
                                     mutation {
                                         createPointTransaction(
                                             impUid: "${rsp.imp_uid}",
-                                            merchant_uid: "${rsp.merchant_uid}"
                                             amount: ${rsp.paid_amount}) { 
                                         id
                                         }
@@ -62,7 +60,7 @@
                             {
                                 headers: {
                                     authorization:
-                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJiYkBhYWEuY29tIiwic3ViIjoiNTM2MWFjMGMtNjE3ZC00YTBlLWJjMWUtNDE0MTY2NzFmYjA0IiwiaWF0IjoxNjUwMDExODM3LCJleHAiOjE2NTAwOTgyMzd9.1pVmn0wnGAZP-R1eueHJpcLEqQEAJMNRGHTdn4cjVyA",
+                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJiYkBhYWEuY29tIiwic3ViIjoiZTA3ODA1ZDUtZWIzZC00NzMyLWJjNDMtZTFjYTI0MDZlMDYxIiwiaWF0IjoxNjUwMTU2NzE0LCJleHAiOjE2NTAyNDMxMTR9.Vq30k-fa_s-zLjExqM1IitLFbUWilAT3N_hUzSm-hw4",
                                 },
                             }
                         );

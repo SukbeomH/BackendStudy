@@ -79,8 +79,9 @@ type DealComment {
 type PointTransaction {
   id: String!
   impUid: String!
+  merchantUid: String!
   impToken: String!
-  amount: Int!
+  requestAmount: Int!
   cancelAmount: Int!
   status: POINT_TRANSACTION_STATUS_ENUM!
   user: User!
@@ -132,8 +133,8 @@ type Mutation {
   deleteComment(CommentId: String!): Comment!
   createDealComment(createDealCommentInput: CreateDealCommentInput!): DealComment!
   deleteDealComment(DealCommentId: String!): DealComment!
-  createPointTransaction(impUid: String!, amount: Float!): PointTransaction!
-  refundPointTransaction(impUid: String!, cancelAmount: Float!): PointTransaction!
+  createPointTransaction(impUid: String!, requestAmount: Float!): PointTransaction!
+  refundPointTransaction(impUid: String!, merchantUid: String!, cancelAmount: Float!): PointTransaction!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Product!

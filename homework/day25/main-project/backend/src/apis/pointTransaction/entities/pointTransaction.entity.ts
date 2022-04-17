@@ -39,7 +39,7 @@ export class PointTransaction {
 
     @Column({ default: 0 })
     @Field(() => Int, { defaultValue: 0 })
-    amount: number;
+    requestAmount: number;
 
     @Column({ default: 0 })
     @Field(() => Int, { defaultValue: 0 })

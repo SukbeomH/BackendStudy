@@ -29,9 +29,7 @@ export class IamportService {
         return access_token;
     }
 
-    async fetchPaymentData({ impUid }) {
-        // 발급되어 있는 아임포트 엑세스 토큰 가져오기
-        const accessToken = await this.getToken();
+    async fetchPaymentData({ accessToken, impUid }) {
         // imp_uid로 아임포트 서버에서 결제 정보 조회
         const getPaymentData = await axios({
             // imp_uid 전달
@@ -40,44 +38,23 @@ export class IamportService {
             // 인증 토큰 Authorization header에 추가
             headers: { Authorization: accessToken },
         });
-        if (!getPaymentData)
-            throw new UnprocessableEntityException('유효하지 않은 결제정보 🥵');
         // 조회한 결제 정보
         const paymentData = getPaymentData.data.response;
         return paymentData;
     }
 
-    async validateOrder({ impUid, amount }) {
-        const paymentData = await this.fetchPaymentData({ impUid });
+    async validateOrder({ accessToken, impUid, requestAmount }) {
+        const paymentData = await this.fetchPaymentData({
+            accessToken,
+            impUid,
+        });
         // 결제되어야 하는 금액
-        const amountToBePaid = amount;
+        const amountToBePaid = requestAmount;
         if (paymentData.amount !== amountToBePaid)
             throw new UnprocessableEntityException(
                 '오류: 결제금액 위조시도 👿',
             );
-        // switch (paymentData.status) {
-        //     가상계좌 발급
-        //     case 'ready':
-        //         // DB에 가상계좌 발급 정보 저장
-        //         const { vbank_num, vbank_date, vbank_name } = paymentData;
-        //         await Users.findByIdAndUpdate('/* 고객 id */', {
-        //             $set: { vbank_num, vbank_date, vbank_name },
-        //         });
-        //         // 가상계좌 발급 안내 문자메시지 발송
-        //         SMS.send({
-        //             text: `가상계좌 발급이 성공되었습니다. 계좌 정보 ${vbank_num} ${vbank_date} ${vbank_name}`,
-        //         });
-        //         res.send({
-        //             status: 'vbankIssued',
-        //             message: '가상계좌 발급 성공',
-        //         });
-        //         break;
-        //     결제 완료
-        //     case 'paid':
-        //         res.send({ status: 'success', message: '일반 결제 성공' });
-        //         break;
-        // }
-        return true;
+        return paymentData.status;
     }
 
     async refund({ accessToken, impUid, cancelAmount, cancelableAmount }) {
