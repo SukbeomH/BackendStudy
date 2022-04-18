@@ -38,6 +38,17 @@ export class PointTransactionService {
         // 거래기록이 이미 존재하는지 확인
         const order = await this.pointTransactionRepository.findOne({ impUid });
         if (order) throw new ConflictException('이미 존재하는 결제 건입니다 🫢');
+        // 아임포트 측 거래기록 검증
+        const paymentData = await this.iamportService.fetchPaymentData({
+            accessToken,
+            impUid,
+        });
+        // 결제되어야 하는 금액 비교
+        const amountToBePaid = requestAmount;
+        if (paymentData.amount !== amountToBePaid)
+            throw new UnprocessableEntityException(
+                '오류: 결제금액 위조시도 👿',
+            );
         // 거래기록 생성 && 내부 거래 id 생성
         const merchantUid = this.merchantUid();
         // 결제정보 저장
