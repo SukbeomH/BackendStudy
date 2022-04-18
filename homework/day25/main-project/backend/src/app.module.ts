@@ -36,7 +36,7 @@ import { UserModule } from './apis/user/user.module';
             // host: 'localhost',
             port: 3306,
             username: 'root',
-            password: 'root',
+            password: process.env.MYSQL_PSWD,
             database: 'myDocker',
             // database: 'localhost',
             entities: [__dirname + '/apis/**/*.entity.*'],

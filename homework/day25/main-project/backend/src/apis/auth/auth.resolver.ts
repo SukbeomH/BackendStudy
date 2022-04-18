@@ -44,22 +44,4 @@ export class AuthResolver {
     restoreAccessToken(@ContextUser() contextUser: IContextUser) {
         return this.authService.getAccessToken({ user: contextUser });
     }
-
-    // @UseGuards(GqlAuthGoogleGuard)
-    // @Mutation(() => User)
-    // loginGoogle(@Req() req: Request & IOAuthUser, @Res() res: Response) {
-    //     return this.authService.loginSocial({ req, res });
-    // }
-
-    // @UseGuards(GqlAuthNaverGuard)
-    // @Mutation(() => User)
-    // loginNaver(@Req() req: Request & IOAuthUser, @Res() res: Response) {
-    //     return this.authService.loginSocial({ req, res });
-    // }
-
-    // @UseGuards(GqlAuthKakaoGuard)
-    // @Mutation(() => User)
-    // loginKakao(@Req() req: Request & IOAuthUser, @Res() res: Response) {
-    //     return this.authService.loginSocial({ req, res });
-    // }
 }

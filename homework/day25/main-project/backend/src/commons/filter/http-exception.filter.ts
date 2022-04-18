@@ -6,10 +6,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
     catch(exception: HttpException) {
         const status = exception.getStatus();
         const message = exception.message;
-        console.log('=================================');
+        console.log('🚩 ======= 😃 ======== 🫣 ========= 😵 ========= 🚩');
         console.log('ERROR : ');
         console.log(message);
         console.log(status);
-        console.log('=================================');
+        console.log('🚩 ======= 😃 ======== 🫣 ========= 😵 ========= 🚩');
     }
 }

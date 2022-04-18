@@ -6,10 +6,9 @@ import { Injectable } from '@nestjs/common';
 export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
     constructor() {
         super({
-            clientID:
-                '293837098273-sqem9d40adauhv6nhrsir5s3ltp8il3k.apps.googleusercontent.com',
-            clientSecret: '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',
-            callbackURL: 'http://localhost:3000/login/google',
+            clientID: process.env.OAUTH_GOOGLE_ID,
+            clientSecret: process.env.OAUTH_GOOGLE_SECRET,
+            callbackURL: process.env.OAUTH_GOOGLE_CALLBACK,
             scope: ['email', 'profile'],
         });
     }
@@ -20,7 +19,7 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
             password: String(Math.floor(Math.random() * 10 ** 9)),
             snsId: profile.id,
             provider: 'google',
-            auth: 12345,
+            auth: String(Math.floor(Math.random() * 10 ** 6)).padStart(6, '0'),
         };
     }
 }

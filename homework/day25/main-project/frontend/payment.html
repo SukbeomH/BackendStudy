@@ -43,7 +43,6 @@
                     // callback
                     if (rsp.success) {
                         // 결제 성공시
-                        console.log(rsp);
                         const data = await axios.post(
                             "http://localhost:3000/graphql",
                             {
@@ -60,11 +59,10 @@
                             {
                                 headers: {
                                     authorization:
-                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJiYkBhYWEuY29tIiwic3ViIjoiZTA3ODA1ZDUtZWIzZC00NzMyLWJjNDMtZTFjYTI0MDZlMDYxIiwiaWF0IjoxNjUwMTU2NzE0LCJleHAiOjE2NTAyNDMxMTR9.Vq30k-fa_s-zLjExqM1IitLFbUWilAT3N_hUzSm-hw4",
+                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJiYkBhYWEuY29tIiwic3ViIjoiZTA3ODA1ZDUtZWIzZC00NzMyLWJjNDMtZTFjYTI0MDZlMDYxIiwiaWF0IjoxNjUwMjQ2Mjc5LCJleHAiOjE2NTAzMzI2Nzl9.jWHipMmCvc_IUV6O593lrDVD3FaODwt1f5ix5x35-UE",
                                 },
                             }
                         );
-                        console.log(data);
                     } else {
                         // 결제 실패시
                         alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);

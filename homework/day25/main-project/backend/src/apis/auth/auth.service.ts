@@ -12,7 +12,7 @@ export class AuthService {
     setRefreshToken({ user, res }) {
         const refreshToken = this.jwtService.sign(
             { email: user.email, sub: user.id },
-            { secret: 'projectRefreshKey', expiresIn: '2w' },
+            { secret: process.env.BACKEND_REFRESH_KEY, expiresIn: '2w' },
         );
         //개발환경
         res.setHeader('Set-Cookie', `refreshToken=${refreshToken}; path=/;`);
@@ -27,7 +27,7 @@ export class AuthService {
     getAccessToken({ user }) {
         return this.jwtService.sign(
             { email: user.email, sub: user.id },
-            { secret: 'projectAccessKey', expiresIn: '1d' },
+            { secret: process.env.BACKEND_ACCESS_KEY, expiresIn: '1d' },
         );
     }
 
