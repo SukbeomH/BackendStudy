@@ -38,7 +38,7 @@ export class PointTransactionService {
             // 결제정보 저장
             const pointTransaction = this.pointTransactionRepository.create({
                 impUid,
-                amount,
+                amount: amount,
                 user: contextUser,
                 status,
             });
@@ -58,6 +58,7 @@ export class PointTransactionService {
             });
             await queryRunner.manager.save(updatedUser);
 
+            await queryRunner.commitTransaction();
             // 최종결과를 프론트에 반환
             return pointTransaction;
         } catch (error) {

@@ -7,18 +7,6 @@
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        function merchantUid() {
-            const date = new Date()
-            const yyyy = date.getFullYear()
-            const mm = String(date.getMonth() + 1).padStart(2, "0")
-            const dd = String(date.getDate()).padStart(2, "0")
-            const h = String(date.getHours()).padStart(2, "0")
-            const m = String(date.getMinutes()).padStart(2, "0")
-            const s = String(date.getSeconds()).padStart(2, "0")
-            const r = String(Math.floor(Math.random() * 10 ** 6)).padStart(6, "0")
-            const UUID = `ORD${yyyy}${mm}${dd}-${h}${m}${s}-${r}`
-            return UUID
-        }
         function myPayment() {
             const myAmount = Number(document.getElementById("amount").value);
 
@@ -29,7 +17,6 @@
                     // param
                     pg: "html5_inicis",
                     pay_method: "card",
-                    // merchant_uid: merchantUid, // 주문번호 - 결제위변조 여부 검증
                     name: "point",
                     amount: myAmount,
                     buyer_email: "puppy@gmail.com",
@@ -59,7 +46,7 @@
                             {
                                 headers: {
                                     authorization:
-                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJiYkBhYWEuY29tIiwic3ViIjoiZTA3ODA1ZDUtZWIzZC00NzMyLWJjNDMtZTFjYTI0MDZlMDYxIiwiaWF0IjoxNjUwMjQ2Mjc5LCJleHAiOjE2NTAzMzI2Nzl9.jWHipMmCvc_IUV6O593lrDVD3FaODwt1f5ix5x35-UE",
+                                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNjY0BhYWEuY29tIiwic3ViIjoiYThlMTNhN2MtNzNlMy00YjY2LWE4NWMtYTE0NGI3ZTYyNGNmIiwiaWF0IjoxNjUwMjgxOTc0LCJleHAiOjE2NTAyOTk5NzR9.PuYTEsNuDYNI903Qo6W2QUgFNOh_DuXT6jL8e02Y4QU",
                                 },
                             }
                         );

@@ -1,6 +1,8 @@
 import { Strategy } from 'passport-naver-v2';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class JwtNaverStrategy extends PassportStrategy(Strategy, 'naver') {

@@ -30,11 +30,7 @@ export class PointTransaction {
     impUid: string;
 
     @Column()
-    @Field(() => String)
-    merchantUid: string;
-
-    @Column({ default: 0 })
-    @Field(() => Int, { defaultValue: 0 })
+    @Field(() => Int)
     amount: number;
 
     // paid canceled ... enum형식으로 지정

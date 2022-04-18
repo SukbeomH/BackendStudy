@@ -12,6 +12,8 @@ import { DealCommentModule } from './apis/dealComment/dealComment.module';
 import { PointTransactionModule } from './apis/pointTransaction/pointTransaction.module';
 import { ProductModule } from './apis/product/product.module';
 import { UserModule } from './apis/user/user.module';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
     imports: [

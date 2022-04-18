@@ -33,7 +33,7 @@ export class PointTransactionResolver {
         // 결제 기록에 중복이 있는지 검증
         await this.pointTransactionService.checkDuplicate({ impUid });
         // 결제 저장
-        return this.pointTransactionService.create({
+        return await this.pointTransactionService.create({
             impUid,
             amount,
             contextUser,
