@@ -23,7 +23,7 @@ export class PointTransactionService {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     // Transaction 시작 (쿼리러너를 통해서)
-    await queryRunner.startTransaction();
+    await queryRunner.startTransaction('SERIALIZABLE');
 
     try {
       // 거래기록 생성
@@ -39,8 +39,14 @@ export class PointTransactionService {
 
       // throw new Error('쿼리러너 에러 테스트!!');
 
-      // 유저의 포인트 확인
-      const user = await this.userRepository.findOne({ id: contextUser.id });
+      // // 유저의 포인트 확인
+      // const user = await this.userRepository.findOne({ id: contextUser.id });
+      const user = await queryRunner.manager.findOne(
+        User,
+        { id: contextUser.id },
+        { lock: { mode: 'pessimistic_write' } },
+      );
+
       // // 유저의 포인트 업데이트 (충전한 포인트 더해주기)
       // await this.userRepository.update(
       //   { id: user.id },
@@ -68,7 +74,7 @@ export class PointTransactionService {
     }
   }
 }
-// 쿼리러너를 매번 연결하고 해제 해줘야 하는 이유
+// 쿼리러너를 매번 연결하고 해제 해줘야 하는 이유 >>
 // DB와 연결가능한 갯수는 한정되어있으므로,
 // 연결을 끊어주지 않으면 끝없이 연결만 되다가
 // 갯수 제한을 넘기고 종료되어 버린다.

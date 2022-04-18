@@ -8,7 +8,7 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
         super({
             jwtFromRequest: (req) =>
                 req.header.cookie.replace('refreshToken=', ''),
-            secretOrKey: 'projectRefreshKey',
+            secretOrKey: '
         });
     }
 

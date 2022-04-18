@@ -6,18 +6,18 @@ import { Injectable } from '@nestjs/common';
 export class JwtKakaoStrategy extends PassportStrategy(Strategy, 'kakao') {
     constructor() {
         super({
-            clientID: '2a6494a60c579cc94f81e5ffddd4b23a',
-            callbackURL: '/login/kakao/',
+            clientID: 
+            callbackURL: 
         });
     }
 
     validate(accessToken: string, refreshToken: string, profile: any) {
         return {
             email: profile._json.kakao_account.email,
-            password: String(Math.floor(Math.random() * 10 ** 9)),
+            password: 
             snsId: profile.id,
             provider: 'kakao',
-            auth: 123456,
+            auth: ,
         };
     }
 }

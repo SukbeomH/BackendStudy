@@ -7,9 +7,9 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
     constructor() {
         super({
             clientID:
-                '293837098273-sqem9d40adauhv6nhrsir5s3ltp8il3k.apps.googleusercontent.com',
-            clientSecret: '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',
-            callbackURL: 'http://localhost:3000/login/google',
+                '
+            clientSecret: 
+            callbackURL: 
             scope: ['email', 'profile'],
         });
     }
@@ -20,9 +20,9 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
         // console.log(profile);
         return {
             email: profile.emails[0].value,
-            password: '0000',
+            password: '',
             kakao: 'default',
-            auth: 123445,
+            auth: ,
         };
     }
 }

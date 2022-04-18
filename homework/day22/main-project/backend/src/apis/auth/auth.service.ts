@@ -8,7 +8,7 @@ export class AuthService {
     setRefreshToken({ user, res }) {
         const refreshToken = this.jwtService.sign(
             { email: user.email, sub: user.id },
-            { secret: 'projectRefreshKey', expiresIn: '2w' },
+            { secret: '', expiresIn: '2w' },
         );
         //개발환경
         res.setHeader('Set-Cookie', `refreshToken=${refreshToken}`);
@@ -23,7 +23,7 @@ export class AuthService {
     getAccessToken({ user }) {
         return this.jwtService.sign(
             { email: user.email, sub: user.id },
-            { secret: 'projectAccessKey', expiresIn: '1h' },
+            { secret: '', expiresIn: '1h' },
         );
     }
 }
