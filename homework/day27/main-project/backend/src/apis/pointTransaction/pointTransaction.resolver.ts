@@ -14,8 +14,7 @@ export class PointTransactionResolver {
     constructor(
         private readonly pointTransactionService: PointTransactionService,
         private readonly iamportService: IamportService,
-    ) { }
-    
+    ) {}
     @UseGuards(GqlAuthEmailGuard)
     @Mutation(() => PointTransaction)
     async createPointTransaction(
