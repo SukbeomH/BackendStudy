@@ -125,6 +125,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): String!
   restoreAccessToken: String!
+  logout: String!
   createBoard(createBoardInput: CreateBoardInput!): Board!
   updateBoard(boardId: String!, updateBoardInput: UpdateBoardInput!): Board!
   deleteBoard(boardId: String!): Board!

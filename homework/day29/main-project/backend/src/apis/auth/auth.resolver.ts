@@ -1,16 +1,27 @@
-import { UnprocessableEntityException, UseGuards } from '@nestjs/common';
+import {
+    CACHE_MANAGER,
+    Inject,
+    UnprocessableEntityException,
+    UseGuards,
+} from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from './auth.service';
 import { ContextUser, IContextUser } from 'src/commons/auth/gql-user.param';
-import { GqlAuthRefreshGuard } from 'src/commons/auth/graphql-auth.guard';
+import {
+    GqlAuthEmailGuard,
+    GqlAuthRefreshGuard,
+} from 'src/commons/auth/graphql-auth.guard';
 import { UserService } from '../user/user.service';
+import { Cache } from 'cache-manager';
 
 @Resolver()
 export class AuthResolver {
     constructor(
         private readonly userService: UserService,
         private readonly authService: AuthService,
+        @Inject(CACHE_MANAGER)
+        private readonly cacheManager: Cache,
     ) {}
 
     @Mutation(() => String)
@@ -19,6 +30,7 @@ export class AuthResolver {
         @Args('password') password: string,
         @Context() context: any,
     ) {
+        // console.log(context.req);
         // login => email && password 가 일치하는 유저 찾기
         const user = await this.userService.findOne({ email });
         // 일치하는 유저가 없으면 [ 에러 ]
@@ -31,7 +43,6 @@ export class AuthResolver {
         if (!isAuth)
             throw new UnprocessableEntityException('잘못된 비밀번호 입니다');
         // [ Refresh Token - JWT ] 만들어서 프론트 쿠키로 전달
-        console.log(context);
         this.authService.setRefreshToken({ user, res: context.res });
 
         // [ Access Token - JWT ] + 프론트로 전달
@@ -43,5 +54,14 @@ export class AuthResolver {
     @Mutation(() => String)
     restoreAccessToken(@ContextUser() contextUser: IContextUser) {
         return this.authService.getAccessToken({ user: contextUser });
+    }
+
+    @UseGuards(GqlAuthEmailGuard)
+    @Mutation(() => String)
+    async logout(@Context() context: any) {
+        // console.log(context.req);
+        // refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
+        const logout = await this.authService.logout({ req: context.req });
+        return logout;
     }
 }

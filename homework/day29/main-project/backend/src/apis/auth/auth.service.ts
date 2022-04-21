@@ -1,14 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
         private readonly userService: UserService,
+        @Inject(CACHE_MANAGER)
+        private readonly cacheManager: Cache,
     ) {}
 
     setRefreshToken({ user, res }) {
@@ -66,6 +67,34 @@ export class AuthService {
                 res.redirect(
                     'http://localhost:5500/main-project/frontend/login/index.html',
                 );
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async logout({ req }) {
+        try {
+            // 엑세스토큰과 리프레시토큰 가져오기
+            const refreshToken = req.headers.cookie.split('=')[1];
+            const accessToken = req.headers.authorization.split(' ')[1];
+            // 토큰 2개 검증
+            const verifyRefresh = await this.jwtService.verify(refreshToken, {
+                secret: process.env.BACKEND_REFRESH_KEY,
+            });
+            const verifyAccess = await this.jwtService.verify(accessToken, {
+                secret: process.env.BACKEND_ACCESS_KEY,
+            });
+            // 둘다 정상이면 레디스에 저장
+            // console.log(verifyAccess, verifyRefresh);
+            if (verifyAccess && verifyRefresh) {
+                await this.cacheManager.set(refreshToken, 'refresh', {
+                    ttl: 0,
+                });
+                await this.cacheManager.set(accessToken, 'access', {
+                    ttl: 0,
+                });
+                return '로그아웃에 성공했습니다';
             }
         } catch (error) {
             throw error;
