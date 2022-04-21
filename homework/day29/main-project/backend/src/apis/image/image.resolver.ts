@@ -12,7 +12,7 @@ export class ImageResolver {
         @Args('productId') productId: string,
         @Args({ name: 'images', type: () => [String] }) images: string[],
     ) {
-        return this.imageService.create({ productId, boardId,  images });
+        return this.imageService.create({ productId, images });
     }
     // 상품이미지 업데이트
     @Mutation(() => [Image])

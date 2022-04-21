@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Product } from 'src/apis/product/entities/product.entity';
 import { ObjectType, Field } from '@nestjs/graphql';
+import { Board } from 'src/apis/board/entities/board.entity';
 
 @Entity()
 @ObjectType()

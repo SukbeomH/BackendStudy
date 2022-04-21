@@ -99,6 +99,7 @@ type Image {
   id: String!
   image: [String!]!
   product: Product!
+  board: Board!
 }
 
 type Query {
@@ -143,8 +144,8 @@ type Mutation {
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Product!
   restoreDeletedProduct(productId: String!): Product!
-  createImage(productId: String!, images: [String!]!): [Image!]!
-  updateImage(productId: String!, images: [String!]!): [Image!]!
+  createProductImage(productId: String!, images: [String!]!): [Image!]!
+  updateProductImage(productId: String!, images: [String!]!): [Image!]!
   createUser(email: String!, password: String!, snsId: String!, provider: String!, point: Float!, auth: Float!): User!
   updateUserPassword(newPassword: String!): User!
   deleteUser: Boolean!
