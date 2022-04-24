@@ -86,13 +86,14 @@ export class AuthService {
                 secret: process.env.BACKEND_ACCESS_KEY,
             });
             // 둘다 정상이면 레디스에 저장
-            // console.log(verifyAccess, verifyRefresh);
+            const now = Math.floor(Date.now()/1000)
+            // console.log(verifyAccess.exp);
             if (verifyAccess && verifyRefresh) {
                 await this.cacheManager.set(refreshToken, 'refresh', {
-                    ttl: 0,
+                    ttl: verifyAccess.exp - verifyAccess.iat,
                 });
                 await this.cacheManager.set(accessToken, 'access', {
-                    ttl: 0,
+                    ttl: verifyRefresh.exp - verifyRefresh.iat,
                 });
                 return '로그아웃에 성공했습니다';
             }
