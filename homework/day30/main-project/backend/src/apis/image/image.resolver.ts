@@ -8,7 +8,7 @@ export class ImageResolver {
 
     // 상품이미지 추가
     @Mutation(() => [Image])
-    createProductImage(
+    createImage(
         @Args('productId') productId: string,
         @Args({ name: 'images', type: () => [String] }) images: string[],
     ) {
@@ -16,7 +16,7 @@ export class ImageResolver {
     }
     // 상품이미지 업데이트
     @Mutation(() => [Image])
-    updateProductImage(
+    updateImage(
         @Args('productId') productId: string,
         @Args({ name: 'images', type: () => [String] }) images: string[],
     ) {

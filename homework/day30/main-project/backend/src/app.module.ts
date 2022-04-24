@@ -4,7 +4,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './apis/auth/auth.module';
 import { BoardModule } from './apis/board/board.module';
-import { BoardImageModule } from './apis/boardImage/boardImage.module';
 import { CartModule } from './apis/cart/cart.module';
 import { CategoryModule } from './apis/category/category.module';
 import { CommentModule } from './apis/comment/comment.module';
@@ -22,7 +21,6 @@ import * as redisStore from 'cache-manager-redis-store';
     imports: [
         AuthModule,
         BoardModule,
-        BoardImageModule,
         CartModule,
         CategoryModule,
         CommentModule,
