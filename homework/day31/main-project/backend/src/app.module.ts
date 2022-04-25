@@ -49,6 +49,7 @@ import * as redisStore from 'cache-manager-redis-store';
             logging: true,
             retryDelay: 5000,
             retryAttempts: 15,
+            keepConnectionAlive: true,
         }),
         ConfigModule.forRoot({ isGlobal: true }),
         CacheModule.register<RedisClientOptions>({
