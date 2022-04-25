@@ -24,7 +24,6 @@
 	"editor.detectIndentation": true,
 	"javascript.updateImportsOnFileMove.enabled": "never",
 	"redhat.telemetry.enabled": true,
-	"cSpell.ignoreWords": ["nestjs"],
 	"editor.bracketPairColorization.enabled": true,
 	"editor.bracketPairColorization.independentColorPoolPerBracketType": true,
 	"editor.smoothScrolling": true,
