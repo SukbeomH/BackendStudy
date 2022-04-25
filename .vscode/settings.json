@@ -1,7 +1,7 @@
 {
 	"bracket-pair-colorizer-2.depreciation-notice": false,
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+	"workbench.colorTheme": "Material Theme High Contrast",
 	"terminal.integrated.fontFamily": "MesloLGS NF",
 	"terminal.integrated.fontSize": 14,
 	"workbench.startupEditor": "none",
