@@ -41,7 +41,7 @@ import * as redisStore from 'cache-manager-redis-store';
             // host: 'localhost',
             port: 3306,
             username: 'root',
-            password: process.env.MYSQL_PSWD,
+            password: 'root',
             database: 'myDocker',
             // database: 'localhost',
             entities: [__dirname + '/apis/**/*.entity.*'],
@@ -50,6 +50,7 @@ import * as redisStore from 'cache-manager-redis-store';
             retryDelay: 5000,
             retryAttempts: 15,
             keepConnectionAlive: true,
+            autoLoadEntities: true,
         }),
         ConfigModule.forRoot({ isGlobal: true }),
         CacheModule.register<RedisClientOptions>({

@@ -48,15 +48,18 @@ export class ProductResolver {
                 match: { description: search },
             },
         });
-        console.log('🚩2', result['hits']['hits'][1]['_source']);
+        console.log('🚩2', result['hits']['hits'][1]);
         // save the search data from elastic to redis
         await this.cacheManager.set(
             `${search}`,
             JSON.stringify(result, null, ' '),
         );
         // return the value that found to client
-
-        return [result];
+        const result2 = [];
+        for (let i = 0; i < result['hits']['hits'].length; i++) {
+            result2.push(result['hits']['hits'][i]['_source']);
+        }
+        return result2;
     }
 
     @Query(() => [Product])
