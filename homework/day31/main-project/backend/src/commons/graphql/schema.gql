@@ -26,12 +26,6 @@ type Board {
   category: Category!
 }
 
-type BoardImage {
-  id: String!
-  image: String!
-  board: Board!
-}
-
 type Cart {
   id: String!
   price: Int!
@@ -106,9 +100,7 @@ type Query {
   fetchBoards: [Board!]!
   fetchBoardsWithDelete: [Board!]!
   fetchBoard(boardId: String!): Board!
-  fetchBoardImages: [BoardImage!]!
-  fetchBoardImage(boardImageId: String!): BoardImage!
-  fetchProducts: [Product!]!
+  fetchProducts(search: String!): [Product!]!
   fetchProduct(productId: String!): Product!
   fetchCategories: [Category!]!
   fetchCategoriesWithDelete: [Category!]!
@@ -130,8 +122,6 @@ type Mutation {
   updateBoard(boardId: String!, updateBoardInput: UpdateBoardInput!): Board!
   deleteBoard(boardId: String!): Board!
   restoreDeletedBoard(boardId: String!): Board!
-  createBoardImage(createBoardImageInput: CreateBoardImageInput!): BoardImage!
-  deleteBoardImage(boardImageId: String!): BoardImage!
   createCart(createCartInput: CreateCartInput!): Cart!
   createCategory(name: String!): Category!
   createComment(createCommentInput: CreateCommentInput!): Comment!
@@ -145,8 +135,8 @@ type Mutation {
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
   deleteProduct(productId: String!): Product!
   restoreDeletedProduct(productId: String!): Product!
-  createProductImage(productId: String!, images: [String!]!): [Image!]!
-  updateProductImage(productId: String!, images: [String!]!): [Image!]!
+  createImage(productId: String!, images: [String!]!): [Image!]!
+  updateImage(productId: String!, images: [String!]!): [Image!]!
   createUser(email: String!, password: String!, snsId: String!, provider: String!, point: Float!, auth: Float!): User!
   updateUserPassword(newPassword: String!): User!
   deleteUser: Boolean!
@@ -164,11 +154,6 @@ input UpdateBoardInput {
   content: String
   userId: String
   categoryName: String
-}
-
-input CreateBoardImageInput {
-  image: String!
-  boardId: String!
 }
 
 input CreateCartInput {

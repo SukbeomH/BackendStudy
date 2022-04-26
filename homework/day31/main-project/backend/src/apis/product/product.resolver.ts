@@ -37,29 +37,23 @@ export class ProductResolver {
     @Query(() => [Product])
     async fetchProducts(@Args('search') search: string) {
         // front search for the 'search' argument
-        // search;
         // is redis has search result?
-        const productCache = await this.cacheManager.get(search);
+        const productCache = await this.cacheManager.get(`products:${search}`);
         if (productCache) return productCache;
         // else search by Elastic Search
         const result = await this.elasticsearchService.search({
             index: 'product',
-            query: {
-                match: { description: search },
-            },
+            query: { match: { name: search } },
         });
-        console.log('🚩2', result['hits']['hits'][1]);
-        // save the search data from elastic to redis
-        await this.cacheManager.set(
-            `${search}`,
-            JSON.stringify(result, null, ' '),
-        );
-        // return the value that found to client
-        const result2 = [];
+        // change the value type to product entity
+        const products = [];
         for (let i = 0; i < result['hits']['hits'].length; i++) {
-            result2.push(result['hits']['hits'][i]['_source']);
+            products.push(result['hits']['hits'][i]['_source']);
         }
-        return result2;
+        // if elastic search has hit, cache to the redis
+        await this.cacheManager.set(`products:${search}`, products, { ttl: 0 });
+        // return the value to the front
+        return products;
     }
 
     @Query(() => [Product])
