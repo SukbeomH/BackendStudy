@@ -6,17 +6,32 @@
       "settings": {
         "analysis": {
           "analyzer": {
-            "my_ngram_analyzer": {
-              "tokenizer": "my_ngram_tokenizer"    
+            "my_analyzer": {
+              "type": "custom",
+              "tokenizer": "my_ngram_tokenizer",
+              "char_flter": [ "camel_filter" ]
+              "filter": [ "my_snow", "lowercase", ... ]
+            }
+          },
+          "char_filter":{
+            "camel_filter": {
+              "type": "pattern_replace",
+              "pattern": "(?<=\\p{Lower})(?=\\p{Upper})",
+              "replacement": " "
             }
           },
           "tokenizer": {
             "my_ngram_tokenizer": {
               "type": "nGram",
-              "min_gram": "1",
+              "min_gram": "2",
               "max_gram": "10"
             }
-          }
+          },
+          "filter": {
+             "my_snow": {
+          "type": "snowball",
+          "language": "English"
+        }
         },
         "max_ngram_diff" : "10"
       }
