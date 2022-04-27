@@ -30,7 +30,7 @@ export class Product {
 
     @Column({ nullable: true })
     @Field(() => String, { nullable: true })
-    description: string;
+    descriptions: string;
 
     @CreateDateColumn()
     createdAt: Date;

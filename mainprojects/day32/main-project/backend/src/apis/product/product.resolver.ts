@@ -36,14 +36,13 @@ export class ProductResolver {
 
     @Query(() => [Product])
     async fetchProducts(@Args('search') search: string) {
-        // front search for the 'search' argument
         // is redis has search result?
         const productCache = await this.cacheManager.get(`products:${search}`);
         if (productCache) return productCache;
         // else search by Elastic Search
         const result = await this.elasticsearchService.search({
             index: 'product',
-            query: { match: { name: search } },
+            query: { bool: {should:[{ prefix: { name: search } }]}},
         });
         // change the value type to product entity
         const products = [];

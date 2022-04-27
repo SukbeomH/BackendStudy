@@ -30,7 +30,7 @@ export class ProductSubscriber implements EntitySubscriberInterface<Product> {
                 {
                     id: event.entity.id,
                     name: event.entity.name,
-                    description: event.entity.description,
+                    description: event.entity.descriptions,
                     price: event.entity.price,
                 },
             ]);

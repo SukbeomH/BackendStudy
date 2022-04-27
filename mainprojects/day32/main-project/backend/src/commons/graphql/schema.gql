@@ -39,7 +39,7 @@ type Product {
   id: String!
   name: String
   price: Int
-  description: String
+  descriptions: String
   user: User!
   carts: [Cart!]!
 }
@@ -180,13 +180,13 @@ scalar Upload
 input CreateProductInput {
   name: String
   price: Int
-  description: String
+  descriptions: String
   userId: String!
 }
 
 input UpdateProductInput {
   name: String
   price: Int
-  description: String
+  descriptions: String
   userId: String
 }
