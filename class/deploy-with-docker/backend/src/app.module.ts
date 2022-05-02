@@ -29,11 +29,11 @@ import { ConfigModule } from '@nestjs/config';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'my-database',
+      host: '10.6.16.4',
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'mydocker02',
+      database: 'gcp-class-sql',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
