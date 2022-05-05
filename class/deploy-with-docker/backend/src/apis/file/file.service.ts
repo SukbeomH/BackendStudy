@@ -15,7 +15,7 @@ export class FileService {
   async upload({ file }: IFile) {
     // Storage로 file 설정
     const storage = new Storage({
-      keyFilename: process.env.STORAGE_KEY_FILE,
+      keyFilename: '/my-secret/gcp-file-storage.json',
       projectId: 'classproject-347010',
     })
       .bucket('codecamp_file_storage')
@@ -39,7 +39,7 @@ export class FileService {
 
   async uploadMany({ files }: IFiles) {
     const storage = new Storage({
-      keyFilename: 'classproject-storage.json',
+      keyFilename: '/my-secret/gcp-file-storage.json',
       projectId: 'classproject-347010',
     }).bucket('codecamp_file_storage');
 

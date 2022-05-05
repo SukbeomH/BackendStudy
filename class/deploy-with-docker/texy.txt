@@ -1,0 +1,3 @@
+kubectl set image deployment/backend-2.1 class-backend-sha256-1=asia.gcr.io/classproject-347010/class_backend:2.5
+
+command: ['sh', '-c', 'echo 'xxx && sleep 6000']

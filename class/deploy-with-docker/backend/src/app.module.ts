@@ -11,6 +11,8 @@ import { PointTransactionModule } from './apis/pointTransaction/pointTransaction
 import { PaymentModule } from './apis/payment/payment.module';
 import { FileModule } from './apis/file/file.module';
 import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -40,7 +42,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
