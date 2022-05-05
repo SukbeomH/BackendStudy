@@ -22,7 +22,7 @@ steps:
       - set
       - image
       - deployment/backend-3rd
-      - class-backend-sha256-1=asia.gcr.io/classproject-347010/class_backend:4.0.2
+      - class-backend-sha256-1=asia.gcr.io/classproject-347010/class_backend:4.0.3
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-northeast3
       - CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-be02-2
