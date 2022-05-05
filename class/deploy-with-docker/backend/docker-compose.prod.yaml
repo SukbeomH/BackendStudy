@@ -3,7 +3,7 @@ version: '3.7'
 services:
   my-backend:
     platform: linux/x86_64
-    image: asia.gcr.io/classproject-347010/class_backend:4.0.5
+    image: asia.gcr.io/classproject-347010/class_backend:4.0.6
     build:
       context: .
       dockerfile: Dockerfile
